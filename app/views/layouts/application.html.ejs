@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>My Website</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- The HTML5 shim, for IE6-8 support of HTML elements -->
+    <!--[if lt IE 9]>
+    <%- scriptLink('3rd/html5.js', {type:'text/javascript'}) %>
+    <![endif]-->
+
+    <%- scriptLink('3rd/jquery-1.9.1.min.js', {type:'text/javascript'}) %>
+
+    <% if(geddy.config.environment == 'development'){ %>
+    <%- scriptLink('build/page.raw.js', {type:'text/javascript'}) %>
+    <% }else{ %>
+    <%- scriptLink('build/page.min.js', {type:'text/javascript'}) %>
+    <% } %>
+
+    <%- scriptLink('config/init.js', {type: 'text/javascript'}) %>
+
+    <%- styleLink('build/page.min.css', {rel:'stylesheet'}) %>
+
+    <!--[if lt IE 8]>
+    <%- styleLink('build/page_ie.min.css', {rel:'stylesheet'}) %>
+    <![endif]-->
+
+    <!--[if IE 6]>
+    <%- styleLink('build/page_ie6.min.css', {rel:'stylesheet'}) %>
+    <![endif]-->
+
+</head>
+<body>
+    <div id="wrapper">
+
+        <!-- header start -->
+        <div id="header">
+            <%= partial('header'); %>
+        </div>
+        <!-- header end -->
+
+        <!-- menu start -->
+        <div id="nav">
+            <%= partial('menu'); %>
+        </div>
+        <!-- menu end -->
+
+        <!-- content start -->
+        <div id="content">
+            <%- render(); %>
+        </div>
+        <!-- content end -->
+
+        <!-- footer start -->
+        <div id="footer">
+           <%= partial('footer'); %>
+        </div>
+        <!-- footer end -->
+    </div>
+</body>
+</html>
+

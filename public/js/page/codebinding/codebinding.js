@@ -1,0 +1,2 @@
+//codebinding
+var cb;
