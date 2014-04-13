@@ -18,7 +18,12 @@ module.exports = function(grunt) {
             },
             css: {
                 // the files to concatenate
-                src: ['public/css/theme/variables.less', 'public/css/main/initial/*.css', 'public/css/main/common.less'],
+                src: ['public/css/theme/variables.less',
+                      'public/css/main/initial/*.css',
+                      'public/css/main/common.less',
+                      'public/css/main/header.less',
+                      'public/css/main/navigation.less',
+                      'public/css/main/footer.less'],
                 // the location of the resulting JS file
                 dest: 'public/css/build/page.raw.less'
             },
