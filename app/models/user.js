@@ -6,8 +6,9 @@ var User = function () {
         nickname: {type: 'string'}
     });
 
-    this.validatesLength('username', {min: 6});
-    this.validatesLength('password', {min: 6});
+    this.validatesLength('username', {min: 6, max: 30});
+    this.validatesLength('password', {min: 6, max: 30});
+    this.validatesLength('nickname', {max: 30});
 
     /*
      this.property('login', 'string', {required: true});
