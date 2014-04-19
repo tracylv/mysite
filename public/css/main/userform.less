@@ -1,6 +1,7 @@
+/* user form */
 .userform
 {
-  margin: 50px auto 100px;
+  margin: 50px auto 100px 0;
   width: 360px;
 }
 
@@ -25,6 +26,13 @@
   padding: 6px 10px;
 }
 
+.userform .itemslist .item .error
+{
+  color: #ff0000;
+  display: inline-block;
+  padding-top: 3px;
+}
+
 .userform .submit .submitBtn
 {
   width: 360px;
@@ -35,4 +43,131 @@
   border: none;
   display: block;
   cursor: pointer;
+  font-weight: bold;
+}
+
+/* user list */
+.userlist
+{
+  margin: 50px auto 100px 0;
+  width: 960px;
+}
+
+.userlist .title h3
+{
+  font-size: 114%;
+  padding-bottom: 20px;
+  font-weight: bold;
+}
+
+.userlist .list .item
+{
+  border-bottom: 1px solid #808080;
+}
+
+.userlist .list .item a,
+.userlist .list .subtitle
+{
+  padding: 10px 0;
+  display: block;
+}
+
+.userlist .list .subtitle
+{
+  font-weight: bold;
+}
+
+.userlist .list .item:hover
+{
+  background-color: @greybg;
+}
+
+.userlist .list .subtitle:hover
+{
+  background-color: #fff;
+}
+
+.userlist .list .item .info
+{
+  width: 320px;
+  float: left;
+}
+
+.userlist .createuser
+{
+  padding-top: 30px;
+}
+
+.userlist .createuser a
+{
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  color: @whitecolor;
+  background-color: #FF1493;
+  border: none;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* user edit */
+.useredit .userform .submit .submitBtn
+{
+  width: 170px;
+  float: left;
+}
+
+.useredit .userform .submit .backlist
+{
+  width: 170px;
+  height: 40px;
+  line-height: 40px;
+  color: @whitecolor;
+  background-color: #FF1493;
+  border: none;
+  display: block;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  float: right;
+}
+
+/* user show */
+.usershow .userlist .submit
+{
+  padding-top: 30px;
+}
+
+.usershow .userlist .submit a,
+.usershow .userlist .submit input
+{
+  width: 200px;
+  height: 40px;
+  line-height: 40px;
+  color: @whitecolor;
+  background-color: #FF1493;
+  border: none;
+  display: block;
+  cursor: pointer;
+  text-align: center;
+  font-weight: bold;
+  float: left;
+}
+
+.usershow .userlist .submit input
+{
+  margin: 0 20px;
+}
+
+.usershow .userlist .list .item:hover
+{
+  background-color: #fff;
+}
+
+.usershow .userlist .list .item
+{
+  padding: 10px 0;
+  display: block;
 }

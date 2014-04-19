@@ -20,8 +20,14 @@
 var router = new geddy.RegExpRouter();
 
 router.get('/').to('Main.index');
+
+router.get('/users/list(.:format)').to('Users.list');
+router.get('/users/show/:id(.:format)').to('Users.show');
 router.get('/users/signup(.:format)').to('Users.signup');
 router.post('/users/signup(.:format)').to('Users.signup_post');
+router.get('/users/edit/:id(.:format)').to('Users.edit');
+router.post('/users/edit/:id(.:format)').to('Users.update');
+router.post('/users/delete/:id(.:format)').to('Users.remove');
 
 // Basic routes
 // router.match('/moving/pictures/:id', 'GET').to('Moving.pictures');
