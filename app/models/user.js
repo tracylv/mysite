@@ -1,13 +1,18 @@
 var User = function () {
 
     this.defineProperties({
-        username: {type: 'string', required: true},
-        password: {type: 'string', required: true},
-        nickname: {type: 'string'}
+        username: {type: 'string', required: true, message: '用户名是必要项。'},
+        password: {type: 'string', required: true, message: '密码是必要项。'},
+        confirmpassword: {type: 'string', required: true, message: '密码是必要项。'},
+        nickname: {type: 'string', required: false}
     });
 
-    this.validatesLength('username', {min: 6});
-    this.validatesLength('password', {min: 6});
+    this.validatesLength('username', {min: 6, max: 30, message: '用户名不能小于 6 个或大于 30 个字符长度。'});
+    this.validatesLength('password', {min: 6, max: 30, message: '密码不能小于 6 个或大于 30 个字符长度。'});
+    this.validatesConfirmed('confirmpassword', 'password', { message: '两次新密码必须一致。'});
+    this.validatesWithFunction('nickname', { message: '昵称不能大于20个字符长度。'}, function(nickname){
+        return nickname.length <= 20;
+    });
 
     /*
      this.property('login', 'string', {required: true});

@@ -1,0 +1,43 @@
+<div class="usershow">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userlist">
+                    <form class="userdeleteform" action="/users/delete/<%= user.id %>" method="post">
+                        <div class="title">
+                            <h3>用户详情</h3>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <li class="item subtitle">
+                                    <ul class="infos cf">
+                                        <li class="info username">用户名</li>
+                                        <li class="info password">密码</li>
+                                        <li class="info nickname">昵称</li>
+                                    </ul>
+                                </li>
+
+                                <% if (user) { %>
+                                <li class="item">
+                                    <ul class="infos cf">
+                                        <li class="info username"><%= user.username %></li>
+                                        <li class="info password"><%= user.password %></li>
+                                        <li class="info nickname"><%= user.nickname %></li>
+                                    </ul>
+                                </li>
+                                <% } %>
+
+                            </ul>
+                        </div>
+
+                        <div class="submit cf">
+                            <a href="/users/edit/<%= user.id %>">修改用户</a>
+                            <input class="deletesubmit submitBtn"  type="submit" value="删除用户" />
+                            <a href="/users/list">返回用户列表</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

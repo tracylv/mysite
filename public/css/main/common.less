@@ -1,1 +1,99 @@
+/* common.css */
+body
+{
 
+  color: @color;
+  font-family: @fontfamily;
+  font-size: @fontsize;
+  line-height: @lineheight;
+  margin: 0;
+  padding: 0;
+  text-align: @textalign;
+}
+
+.cf:after,
+ul.cf li:after,
+.ro:after,
+.ce:after
+{
+  clear: both;
+  content: ".";
+  display: block;
+  height: 0;
+  visibility: hidden;
+}
+
+.w12
+{
+  width: @w12;
+  margin: 0 auto;
+}
+
+.ro
+{
+  clear: left;
+}
+
+.left
+{
+  float: left;
+}
+
+.right
+{
+  float: right;
+}
+
+.hide
+{
+  display: none;
+}
+
+.show
+{
+  display: block;
+}
+
+a,
+a:visited,
+a:link,
+a:hover
+{
+  color: @anchorcolor;
+  text-decoration: none;
+}
+
+.blackbg
+{
+  background-color: @blackbg;
+}
+
+.whitebg
+{
+  background-color: @whitebg;
+}
+
+.bluebg
+{
+  background-color: @bluebg;
+}
+
+.redbg
+{
+  background-color: @redbg;
+}
+
+.goldbg
+{
+  background-color: @goldbg;
+}
+
+.greenbg
+{
+  background-color: @greenbg;
+}
+
+.greybg
+{
+  background-color: @greybg;
+}
