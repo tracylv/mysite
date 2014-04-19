@@ -1,4 +1,7 @@
 var Users = function () {
+
+    geddy.viewHelpers.page_info.page_title = "个人网站 - 用户";
+
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
     this.list = function (req, resp, params) {

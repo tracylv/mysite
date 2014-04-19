@@ -17,6 +17,9 @@
 */
 
 var Main = function () {
+
+  geddy.viewHelpers.page_info.page_title = "个人网站 - 生活";
+
   this.index = function (req, resp, params) {
     this.respond({params: params}, {
       format: 'html'
