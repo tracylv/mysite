@@ -1,0 +1,43 @@
+<div class="usershow">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userlist">
+                    <form class="userdeleteform" action="/admins/delete/<%= admin.id %>" method="post">
+                        <div class="title">
+                            <h3>管理员详情</h3>
+                        </div>
+                        <div class="list">
+                            <ul>
+                                <li class="item subtitle">
+                                    <ul class="infos cf">
+                                        <li class="info username">用户名</li>
+                                        <li class="info password">密码</li>
+                                        <li class="info nickname">昵称</li>
+                                    </ul>
+                                </li>
+
+                                <% if (admin) { %>
+                                <li class="item">
+                                    <ul class="infos cf">
+                                        <li class="info username"><%= admin.username %></li>
+                                        <li class="info password"><%= admin.password %></li>
+                                        <li class="info nickname"><%= admin.nickname %></li>
+                                    </ul>
+                                </li>
+                                <% } %>
+
+                            </ul>
+                        </div>
+
+                        <div class="submit cf">
+                            <a href="/admins/edit/<%= admin.id %>">修改管理员</a>
+                            <input class="deletesubmit submitBtn"  type="submit" value="删除管理员" />
+                            <a href="/admins/list">返回管理员列表</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

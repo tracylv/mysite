@@ -29,6 +29,14 @@ router.get('/users/edit/:id(.:format)').to('Users.edit');
 router.post('/users/edit/:id(.:format)').to('Users.update');
 router.post('/users/delete/:id(.:format)').to('Users.remove');
 
+router.get('/admins/list(.:format)').to('Admins.list');
+router.get('/admins/show/:id(.:format)').to('Admins.show');
+router.get('/admins/signup(.:format)').to('Admins.signup');
+router.post('/admins/signup(.:format)').to('Admins.signup_post');
+router.get('/admins/edit/:id(.:format)').to('Admins.edit');
+router.post('/admins/edit/:id(.:format)').to('Admins.update');
+router.post('/admins/delete/:id(.:format)').to('Admins.remove');
+
 router.get('/lives/index(.:format)').to('Lives.index');
 
 router.get('/games/index(.:format)').to('Games.index');

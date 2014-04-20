@@ -1,0 +1,44 @@
+<div class="signup">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userform">
+                    <form class="signupform" action="/admins/signup" method="post">
+                        <div class="title">
+                            <h3>管理员注册</h3>
+                        </div>
+                        <div class="itemslist">
+                            <div class="item">
+                                <input name="username" type="text" maxlength="30" value="<%= admin.username %>"/>
+                                <% if(admin.errors && admin.errors.username) { %>
+                                <span class="error"><%= admin.errors.username %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="password" type="password" maxlength="30" value="<%= admin.password %>" />
+                                <% if(admin.errors && admin.errors.password) { %>
+                                <span class="error"><%= admin.errors.password %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="confirmpassword" type="password" maxlength="30" value="<%= admin.confirmpassword %>"/>
+                                <% if(admin.errors && admin.errors.confirmpassword) { %>
+                                <span class="error"><%= admin.errors.confirmpassword %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="nickname" type="text" maxlength="20" value="<%= admin.nickname %>" />
+                                <% if(admin.errors && admin.errors.nickname) { %>
+                                <span class="error"><%= admin.errors.nickname %></span>
+                                <%}%>
+                            </div>
+                        </div>
+                        <div class="submit">
+                            <input class="signupsubmit submitBtn"  type="submit" value="立即注册" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

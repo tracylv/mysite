@@ -1,0 +1,46 @@
+<div class="users">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userlist">
+                    <div class="title">
+                        <h3>管理员列表</h3>
+                    </div>
+                    <div class="list">
+                        <ul>
+                            <li class="item subtitle">
+                                <ul class="infos cf">
+                                    <li class="info username">用户名</li>
+                                    <li class="info password">密码</li>
+                                    <li class="info nickname">昵称</li>
+                                </ul>
+                            </li>
+
+                            <% if (admins) {
+                                    for(var i = 0, len = admins.length; i < len; i++)
+                            {
+                            %>
+                            <li class="item">
+                                <a href="/admins/show/<%= admins[i].id %>">
+                                    <ul class="infos cf">
+                                        <li class="info username"><%= admins[i].username %></li>
+                                        <li class="info password"><%= admins[i].password %></li>
+                                        <li class="info nickname"><%= admins[i].nickname %></li>
+                                    </ul>
+                                </a>
+                            </li>
+                            <%    }
+                            }
+                            %>
+
+                        </ul>
+                    </div>
+
+                    <div class="createuser">
+                        <a href="/admins/signup">添加管理员</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
