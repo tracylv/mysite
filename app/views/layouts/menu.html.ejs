@@ -3,12 +3,19 @@
         <div class="ce w12">
             <div class="br1">
                 <ul class="cf">
-                    <li><a class="active" href="/lives/index">我的生活</a></li>
-                    <li><a href="/games/index">我的游戏</a></li>
-                    <li><a href="/basketballs/index">我的NBA</a></li>
-                    <li><a href="/win8/index">我的WIN8</a></li>
-                    <li><a href="/sites/index">网站定制</a></li>
-                    <li><a href="/advices/index">意见与建议</a></li>
+            <% for (var i = 0, len = menu_data.data.length; i < len; i++ )
+               {
+                   if(menu_data.active_tab == menu_data.data[i].tab)
+                   {
+            %>
+                    <li><a class="active" href="<%= menu_data.data[i].link %>"><%= menu_data.data[i].text %></a></li>
+                <% }
+                   else
+                   { %>
+                    <li><a href="<%= menu_data.data[i].link %>"><%= menu_data.data[i].text %></a></li>
+            <%     }
+               }
+            %>
                 </ul>
             </div>
         </div>
