@@ -5,4 +5,23 @@ var page_info = {
     meta_author : "Tracy Lv"
 };
 
+
+var menu_data = {
+    active_tab : "life",
+    data : [{tab: "life", text: "我的生活", link: "/lives/index"},
+            {tab: "game", text: "我的游戏", link: "/games/index"},
+            {tab: "basketball", text: "我的NBA", link: "/basketballs/index"},
+            {tab: "win8", text: "我的WIN8", link: "/win8/index"},
+            {tab: "site", text: "网站定制", link: "/sites/index"},
+            {tab: "advice", text: "意见与建议", link: "/advices/index"},
+            {tab: "admin", text: "管理员入口", link: "/users/list"}]
+};
+
+
+
+
+
+
+
 exports.page_info = page_info;
+exports.menu_data = menu_data;
