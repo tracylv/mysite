@@ -29,6 +29,18 @@ router.get('/users/edit/:id(.:format)').to('Users.edit');
 router.post('/users/edit/:id(.:format)').to('Users.update');
 router.post('/users/delete/:id(.:format)').to('Users.remove');
 
+router.get('/lives/index(.:format)').to('Lives.index');
+
+router.get('/games/index(.:format)').to('Games.index');
+
+router.get('/basketballs/index(.:format)').to('Basketballs.index');
+
+router.get('/win8/index(.:format)').to('Win8.index');
+
+router.get('/sites/index(.:format)').to('Sites.index');
+
+router.get('/advices/index(.:format)').to('Advices.index');
+
 // Basic routes
 // router.match('/moving/pictures/:id', 'GET').to('Moving.pictures');
 //
