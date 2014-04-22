@@ -4,16 +4,21 @@ var User = function () {
         username: {type: 'string', required: true, message: '用户名是必要项。'},
         password: {type: 'string', required: true, message: '密码是必要项。'},
         confirmpassword: {type: 'string', required: true, message: '密码是必要项。'},
-        nickname: {type: 'string', required: false}
+        nickname: {type: 'string', required: true, message: '昵称是必要项。'},
+        email: {type: 'string', required: true, message: '邮箱是必要项。'}
     });
 
     this.validatesLength('username', {min: 6, max: 30, message: '用户名不能小于 6 个或大于 30 个字符长度。'});
     this.validatesLength('password', {min: 6, max: 30, message: '密码不能小于 6 个或大于 30 个字符长度。'});
     this.validatesConfirmed('confirmpassword', 'password', { message: '两次新密码必须一致。'});
+    this.validatesLength('nickname', {min: 1, max: 30, message: '昵称不能大于20个字符长度。'});
+    this.validatesFormat('email', /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/, {message: '邮箱无效。'});
+
+    /*
     this.validatesWithFunction('nickname', { message: '昵称不能大于20个字符长度。'}, function(nickname){
         return nickname.length <= 20;
     });
-
+   */
     /*
      this.property('login', 'string', {required: true});
      this.property('password', 'string', {required: true});

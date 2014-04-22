@@ -9,27 +9,33 @@
                         </div>
                         <div class="itemslist">
                             <div class="item">
-                               <input name="username" type="text" maxlength="30" value="<%= user.username %>"/>
+                               <input name="username" type="text" placeholder="用户名" maxlength="30" value="<%= user.username %>"/>
                                <% if(user.errors && user.errors.username) { %>
                                <span class="error"><%= user.errors.username %></span>
                                <%}%>
                             </div>
                             <div class="item">
-                                <input name="password" type="password" maxlength="30" value="<%= user.password %>" />
+                                <input name="password" type="password" placeholder="密码" maxlength="30" value="<%= user.password %>" />
                                 <% if(user.errors && user.errors.password) { %>
                                 <span class="error"><%= user.errors.password %></span>
                                 <%}%>
                             </div>
                             <div class="item">
-                                <input name="confirmpassword" type="password" maxlength="30" value="<%= user.confirmpassword %>"/>
+                                <input name="confirmpassword" type="password" placeholder="确认密码" maxlength="30" value="<%= user.confirmpassword %>"/>
                                 <% if(user.errors && user.errors.confirmpassword) { %>
                                 <span class="error"><%= user.errors.confirmpassword %></span>
                                 <%}%>
                             </div>
                             <div class="item">
-                                <input name="nickname" type="text" maxlength="20" value="<%= user.nickname %>" />
+                                <input name="nickname" type="text" placeholder="昵称" maxlength="20" value="<%= user.nickname %>" />
                                 <% if(user.errors && user.errors.nickname) { %>
                                 <span class="error"><%= user.errors.nickname %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="email" type="text" placeholder="邮箱" value="<%= user.email %>" />
+                                <% if(user.errors && user.errors.email) { %>
+                                <span class="error"><%= user.errors.email %></span>
                                 <%}%>
                             </div>
                         </div>
