@@ -5,10 +5,19 @@ var Admins = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+    this.category = function (req, resp, params) {
+        this.respond({});
+    };
+
     this.list = function (req, resp, params) {
         var self = this;
+        var issuper = false;
+        if(params.issuper == "true")
+        {
+            issuper = true;
+        }
 
-        geddy.model.Admin.all(function(err, admins){
+        geddy.model.Admin.all({ "issuper": issuper},function(err, admins){
             if(err){
                 throw err;
             }
@@ -40,6 +49,15 @@ var Admins = function () {
     this.signup_post = function (req, resp, params) {
         var self = this
             , admin = geddy.model.Admin.create(params);
+
+        if(!params.issuper)
+        {
+            admin.updateProperties({issuper: false});
+        }
+        else
+        {
+            admin.updateProperties({issuper: true});
+        }
 
         if (!admin.isValid()) {
             this.respond({admin: admin}, {format: 'html', template: 'app/views/admins/signup'});
@@ -77,6 +95,16 @@ var Admins = function () {
             if (err) {
                 throw err;
             }
+
+            if(!params.issuper)
+            {
+                admin.updateProperties({issuper: false});
+            }
+            else
+            {
+                admin.updateProperties({issuper: true});
+            }
+
             admin.updateProperties(params);
 
             if (!admin.isValid()) {

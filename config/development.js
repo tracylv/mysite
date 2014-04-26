@@ -48,6 +48,23 @@ var config = {
     , expiry: 14 * 24 * 60 * 60
   }
 
+, email: {
+     sendoutAccount: {
+        auth: {
+            user: process.env.email_sendoutAccount_user,
+            pass: process.env.email_sendoutAccount_pass
+        }
+     }
+  }
+
+, godadmin: {
+     account: {
+         username: process.env.godadmin_username,
+         password: process.env.godadmin_password
+     },
+     email: process.env.godadmin_email
+  }
+
 };
 
 module.exports = config;

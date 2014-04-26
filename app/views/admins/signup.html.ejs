@@ -38,6 +38,13 @@
                                 <span class="error"><%= admin.errors.email %></span>
                                 <%}%>
                             </div>
+                            <div class="item checkboxitem cf">
+                                <input name="issuper" id="issuper" type="checkbox" value="1" <%= admin.issuper == true ? "checked" : "" %> />
+                                <label for="issuper">高级管理员</label>
+                                <% if(admin.errors && admin.errors.issuper) { %>
+                                <span class="error"><%= admin.errors.issuper %></span>
+                                <%}%>
+                            </div>
                         </div>
                         <div class="submit">
                             <input class="signupsubmit submitBtn"  type="submit" value="立即注册" />

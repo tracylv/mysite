@@ -14,7 +14,7 @@ var menu_data = {
             {tab: "win8", text: "我的WIN8", link: "/win8/index"},
             {tab: "site", text: "网站定制", link: "/sites/index"},
             {tab: "advice", text: "意见与建议", link: "/advices/index"},
-            {tab: "admin", text: "管理员入口", link: "/users/list"}]
+            {tab: "admin", text: "管理员入口", link: "/admins/category"}]
 };
 
 

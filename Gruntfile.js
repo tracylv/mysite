@@ -24,7 +24,7 @@ module.exports = function(grunt) {
                       'public/css/main/header.less',
                       'public/css/main/navigation.less',
                       'public/css/main/footer.less',
-                      'public/css/main/userform.less'],
+                      'public/css/main/users.less'],
                 // the location of the resulting JS file
                 dest: 'public/css/build/page.raw.less'
             },

@@ -18,7 +18,8 @@
       "grunt-contrib-uglify": "^0.4.0",
       "grunt-contrib-watch": "^0.6.1",
       "grunt-contrib-clean": "^0.5.0",
-      "when": "^3.1.0"
+      "when": "^3.1.0",
+      "nodemailer": "0.6.3"
   },
   "devDependencies": {
       "geddy": "^0.12.9",
@@ -31,7 +32,8 @@
       "grunt-contrib-uglify": "^0.4.0",
       "grunt-contrib-watch": "^0.6.1",
       "grunt-contrib-clean": "^0.5.0",
-      "when": "^3.1.0"
+      "when": "^3.1.0",
+      "nodemailer": "0.6.3"
   },
   "engines": {
     "node": ">= 0.10.22"
