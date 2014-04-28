@@ -43,13 +43,6 @@ var config = {
     }
 }
 
-, godadmin: {
-    account: {
-        username: process.env.godadmin_username,
-        password: process.env.godadmin_password
-    },
-    email: process.env.godadmin_email
-}
 /* // Using Postgres as the default, with only a Postgres DB
 , model: {
     defaultAdapter: 'postgres'

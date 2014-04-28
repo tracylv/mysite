@@ -6,7 +6,8 @@ var Admin = function () {
         confirmpassword: {type: 'string', required: true, message: '密码是必要项。'},
         nickname: {type: 'string', required: true, message: '昵称是必要项。'},
         email: {type: 'string', required: true, message: '邮箱是必要项。'},
-        issuper: {type: 'boolean', required: false}
+        issuper: {type: 'boolean', required: false},
+        istop: {type: 'boolean', required: false}
     });
 
     this.validatesLength('username', {min: 6, max: 30, message: '用户名不能小于 6 个或大于 30 个字符长度。'});

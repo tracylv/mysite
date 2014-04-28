@@ -17,7 +17,7 @@ var Admins = function () {
             issuper = true;
         }
 
-        geddy.model.Admin.all({ "issuper": issuper},function(err, admins){
+        geddy.model.Admin.all({ "issuper": issuper, not: {istop: true}},function(err, admins){
             if(err){
                 throw err;
             }

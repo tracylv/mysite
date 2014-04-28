@@ -57,14 +57,6 @@ var config = {
      }
   }
 
-, godadmin: {
-     account: {
-         username: process.env.godadmin_username,
-         password: process.env.godadmin_password
-     },
-     email: process.env.godadmin_email
-  }
-
 };
 
 module.exports = config;
