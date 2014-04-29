@@ -38,11 +38,23 @@ var Users = function () {
     };
 
     this.signup_post = function (req, resp, params) {
-        var self = this
-            , user = geddy.model.User.create(params);
+        var self = this;
+        var user = geddy.model.User.create(params);
+        var duplicateuser = false;
 
-        if (!user.isValid()) {
-            this.respond({user: user}, {format: 'html', template: 'app/views/users/signup'});
+        // check if user have already existed
+        geddy.model.User.first({ username : user.username}, function(err, curruser) {
+            if (err) {
+                throw err;
+            }
+            if (curruser) {
+                user.dupicateerror = "该用户名已被占用。";
+                duplicateuser = true;
+            }
+        });
+
+        if (!user.isValid() || duplicateuser == true) {
+            self.respond({user: user}, {format: 'html', template: 'app/views/users/signup'});
         }
         else {
             user.save(function(err, data) {
@@ -72,6 +84,7 @@ var Users = function () {
 
     this.update = function (req, resp, params) {
         var self = this;
+        var duplicateuser = false;
 
         geddy.model.User.first(params.id, function(err, user) {
             if (err) {
@@ -79,7 +92,20 @@ var Users = function () {
             }
             user.updateProperties(params);
 
-            if (!user.isValid()) {
+
+            // check if user have already existed
+            geddy.model.User.first({ username : user.username}, function(err, curruser) {
+                if (err) {
+                    throw err;
+                }
+                if (curruser) {
+                    user.dupicateerror = "该用户名已被占用。";
+                    duplicateuser = true;
+                }
+            });
+
+
+            if (!user.isValid() || duplicateuser == true) {
                 self.respond({user: user}, {format: 'html', template: 'app/views/users/edit'});
             }
             else {

@@ -13,6 +13,9 @@
                                 <% if(admin.errors && admin.errors.username) { %>
                                 <span class="error"><%= admin.errors.username %></span>
                                 <%}%>
+                                <% if(admin.dupicateerror) { %>
+                                <span class="error"><%= admin.dupicateerror %></span>
+                                <%}%>
                             </div>
                             <div class="item">
                                 <input name="password" type="password" placeholder="密码" maxlength="30" value="<%= admin.password %>" />
@@ -39,7 +42,7 @@
                                 <%}%>
                             </div>
                             <div class="item checkboxitem cf">
-                                <input name="issuper" type="checkbox" value="1" <%= admin.issuper == true ? "checked" : "" %> />
+                                <input id="issuper" name="issuper" type="checkbox" value="1" <%= admin.issuper == true ? "checked" : "" %> />
                                 <label for="issuper">高级管理员</label>
                                 <% if(admin.errors && admin.errors.issuper) { %>
                                 <span class="error"><%= admin.errors.issuper %></span>

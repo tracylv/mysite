@@ -47,8 +47,20 @@ var Admins = function () {
     };
 
     this.signup_post = function (req, resp, params) {
-        var self = this
-            , admin = geddy.model.Admin.create(params);
+        var self = this;
+        var admin = geddy.model.Admin.create(params);
+        var duplicateuser = false;
+
+        // check if user have already existed
+        geddy.model.Admin.first({ username : admin.username}, function(err, curradmin) {
+            if (err) {
+                throw err;
+            }
+            if (curradmin) {
+                admin.dupicateerror = "该用户名已被占用。";
+                duplicateuser = true;
+            }
+        });
 
         if(!params.issuper)
         {
@@ -59,7 +71,7 @@ var Admins = function () {
             admin.updateProperties({issuper: true});
         }
 
-        if (!admin.isValid()) {
+        if (!admin.isValid() || duplicateuser == true) {
             this.respond({admin: admin}, {format: 'html', template: 'app/views/admins/signup'});
         }
         else {
@@ -90,6 +102,7 @@ var Admins = function () {
 
     this.update = function (req, resp, params) {
         var self = this;
+        var duplicateuser = false;
 
         geddy.model.Admin.first(params.id, function(err, admin) {
             if (err) {
@@ -107,7 +120,18 @@ var Admins = function () {
 
             admin.updateProperties(params);
 
-            if (!admin.isValid()) {
+            // check if user have already existed
+            geddy.model.Admin.first({ username : admin.username}, function(err, curradmin) {
+                if (err) {
+                    throw err;
+                }
+                if (curradmin) {
+                    admin.dupicateerror = "该用户名已被占用。";
+                    duplicateuser = true;
+                }
+            });
+
+            if (!admin.isValid() || duplicateuser == true) {
                 self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/edit'});
             }
             else {
