@@ -57,7 +57,7 @@ var Admins = function () {
                 throw err;
             }
             if (curradmin) {
-                admin.dupicateerror = "该用户名已被占用。";
+                admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
                 duplicateuser = true;
             }
         });
@@ -126,7 +126,7 @@ var Admins = function () {
                     throw err;
                 }
                 if (curradmin) {
-                    admin.dupicateerror = "该用户名已被占用。";
+                    admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
                     duplicateuser = true;
                 }
             });

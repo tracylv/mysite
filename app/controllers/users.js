@@ -48,7 +48,7 @@ var Users = function () {
                 throw err;
             }
             if (curruser) {
-                user.dupicateerror = "该用户名已被占用。";
+                user.dupicateerror = geddy.model.User.duplicateUsernameError;
                 duplicateuser = true;
             }
         });
@@ -99,7 +99,7 @@ var Users = function () {
                     throw err;
                 }
                 if (curruser) {
-                    user.dupicateerror = "该用户名已被占用。";
+                    user.dupicateerror = geddy.model.User.duplicateUsernameError;
                     duplicateuser = true;
                 }
             });
