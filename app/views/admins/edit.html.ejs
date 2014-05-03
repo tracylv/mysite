@@ -51,7 +51,7 @@
                         </div>
                         <div class="submit cf">
                             <input class="editsubmit submitBtn"  type="submit" value="保存修改" />
-                            <a class="backlist" href="/admins/list">返回管理员列表</a>
+                            <a class="backlist" href="<%= session_obj.userrole == "super" ? "/admins/category" : "/admins/list"; %>">返回管理员列表</a>
                         </div>
                     </form>
                 </div>
