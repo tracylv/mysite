@@ -3,6 +3,15 @@
         <div class="ce w12">
             <div class="br1 left">
                 <div class="userform">
+
+                 <% if(user.signupSuccess)
+                    { %>
+                    <div class="signupsuccess">
+                        <a href="/users/login">注册成功，请登录。</a>
+                    </div>
+                 <% }
+                    else
+                    { %>
                     <form class="signupform" action="/users/signup" method="post">
                         <div class="title">
                             <h3>用户注册</h3>
@@ -46,6 +55,8 @@
                             <input class="signupsubmit submitBtn"  type="submit" value="立即注册" />
                         </div>
                     </form>
+                 <% } %>
+
                 </div>
             </div>
         </div>

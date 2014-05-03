@@ -11,7 +11,7 @@ var Users = function () {
         // set auto login default value
         params.autologin = true;
 
-        if(req.headers.referer){
+        if(req.headers.referer && !geddy.string.include(req.headers.referer, "signup")){
             params.redirecturl = req.headers.referer;
         }
 
@@ -137,7 +137,9 @@ var Users = function () {
                 if (err) {
                     throw err;
                 }
-                self.redirect("/users/list");
+
+                user.signupSuccess = true;
+                self.respond({ user : user }, {format: 'html', template: 'app/views/users/signup'});
             });
         }
     };
