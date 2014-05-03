@@ -5,6 +5,75 @@ var Admins = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+
+    this.login = function (req, resp, params) {
+
+        // set auto login default value
+        params.autologin = true;
+
+        if(req.headers.referer){
+            params.redirecturl = req.headers.referer;
+        }
+
+        this.respond({admin: params});
+    };
+
+    this.login_post = function (req, resp, params) {
+        var self = this;
+
+        geddy.model.Admin.first({username: params.username, password: params.password}, function(err, admin) {
+            if (err) {
+                throw err;
+            }
+            if (admin) {
+
+                // set auto login
+                if(!!params.autologin == true)
+                {
+                    self.cookies.set("userid", admin.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                }
+                else
+                {
+                    self.cookies.set("userid", admin.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                }
+
+                // set session
+                self.session.set("username", admin.nickname);
+                geddy.viewHelpers.session_obj.username = self.session.get("username");
+
+                if(admin.istop == true)
+                {
+                    self.session.set("userrole", "super");
+                }
+                else if(admin.issuper == true)
+                {
+                    self.session.set("userrole", "senior");
+                }
+                else
+                {
+                    self.session.set("userrole", "junior");
+                }
+
+                geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
+
+                // redirect after successful login
+                if(params.redirecturl)
+                {
+                    self.redirect(params.redirecturl);
+                }
+                else
+                {
+                    self.redirect("/admins/category");
+                }
+
+            }
+            else {
+                params.loginError = geddy.model.Admin.loginError;
+                self.respond({admin: params}, {format: 'html', template: 'app/views/admins/login'});
+            }
+        });
+    };
+
     this.category = function (req, resp, params) {
         this.respond({});
     };

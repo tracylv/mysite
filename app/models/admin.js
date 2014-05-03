@@ -17,7 +17,7 @@ var Admin = function () {
     this.validatesFormat('email', /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/, {message: '邮箱无效。'});
 
     Admin.duplicateUsernameError = '该用户名已被占用。';
-
+    Admin.loginError = '用户名或密码不正确。';
     /*
      this.validatesWithFunction('nickname', { message: '昵称不能大于20个字符长度。'}, function(nickname){
      return nickname.length <= 20;

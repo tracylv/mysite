@@ -59,6 +59,7 @@ var Users = function () {
         });
     };
 
+    // this logout is for both user and admin
     this.logout = function (req, resp, params) {
 
         // clear cookie
@@ -66,7 +67,9 @@ var Users = function () {
 
         // clear session
         this.session.unset("username");
+        this.session.unset("userrole");
         geddy.viewHelpers.session_obj.username = "";
+        geddy.viewHelpers.session_obj.userrole = "";
 
         if(req.headers.referer)
         {

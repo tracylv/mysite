@@ -32,6 +32,8 @@ router.get('/users/edit/:id(.:format)').to('Users.edit');
 router.post('/users/edit/:id(.:format)').to('Users.update');
 router.post('/users/delete/:id(.:format)').to('Users.remove');
 
+router.get('/admins/login(.:format)').to('Admins.login');
+router.post('/admins/login(.:format)').to('Admins.login_post');
 router.get('/admins/category(.:format)').to('Admins.category');
 router.get('/admins/list(.:format)').to('Admins.list');
 router.get('/admins/show/:id(.:format)').to('Admins.show');
