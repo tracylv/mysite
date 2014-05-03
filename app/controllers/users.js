@@ -168,20 +168,21 @@ var Users = function () {
             if (err) {
                 throw err;
             }
-            user.updateProperties(params);
-
 
             // check if user have already existed
-            geddy.model.User.first({ username : user.username}, function(err, curruser) {
-                if (err) {
-                    throw err;
-                }
-                if (curruser) {
-                    user.dupicateerror = geddy.model.User.duplicateUsernameError;
-                    duplicateuser = true;
-                }
-            });
+            if(user.username != params.username) {
+                geddy.model.User.first({ username : params.username}, function(err, curruser) {
+                    if (err) {
+                        throw err;
+                    }
+                    if (curruser) {
+                        user.dupicateerror = geddy.model.User.duplicateUsernameError;
+                        duplicateuser = true;
+                    }
+                });
+            }
 
+            user.updateProperties(params);
 
             if (!user.isValid() || duplicateuser == true) {
                 self.respond({user: user}, {format: 'html', template: 'app/views/users/edit'});

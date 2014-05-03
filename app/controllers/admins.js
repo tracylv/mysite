@@ -148,7 +148,13 @@ var Admins = function () {
                 if (err) {
                     throw err;
                 }
-                self.redirect("/admins/list");
+
+                var redirecturl = "/admins/list";
+                if(geddy.viewHelpers.session_obj.userrole == "super"){
+                    redirecturl = "/admins/category";
+                }
+
+                self.redirect(redirecturl);
             });
         }
     };
@@ -187,18 +193,20 @@ var Admins = function () {
                 admin.updateProperties({issuper: true});
             }
 
-            admin.updateProperties(params);
-
             // check if user have already existed
-            geddy.model.Admin.first({ username : admin.username}, function(err, curradmin) {
-                if (err) {
-                    throw err;
-                }
-                if (curradmin) {
-                    admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
-                    duplicateuser = true;
-                }
-            });
+            if(admin.username != params.username) {
+                geddy.model.Admin.first({ username : params.username}, function(err, curradmin) {
+                    if (err) {
+                        throw err;
+                    }
+                    if (curradmin) {
+                        admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
+                        duplicateuser = true;
+                    }
+                });
+            }
+
+            admin.updateProperties(params);
 
             if (!admin.isValid() || duplicateuser == true) {
                 self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/edit'});
@@ -229,7 +237,12 @@ var Admins = function () {
                     if (err) {
                         throw err;
                     }
-                    self.redirect("/admins/list");
+
+                    var redirecturl = "/admins/list";
+                    if(geddy.viewHelpers.session_obj.userrole == "super"){
+                        redirecturl = "/admins/category";
+                    }
+                    self.redirect(redirecturl);
                 });
             }
         });
