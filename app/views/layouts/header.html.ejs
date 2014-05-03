@@ -6,11 +6,16 @@
             </div>
             <div class="br2 right">
                 <ul class="cf">
-                    <li><span class="welcome">欢迎您</span></li>
-                    <li><a class="signup" href="/signup">注册</a></li>
-
-                    <li><a class="login" href="/login">登录</a></li>
-                    <li><a class="logout" href="logout">登出</a> </li>
+                 <% if(session_obj.username.length > 0)
+                    { %>
+                    <li><span class="welcome">欢迎您, <%= session_obj.username %></span></li>
+                    <li><a class="logout" href="/users/logout">登出</a></li>
+                 <% }
+                    else
+                    { %>
+                    <li><a class="login" href="/users/login">登录</a></li>
+                    <li><a class="signup" href="/users/signup">注册</a></li>
+                 <% } %>
                 </ul>
             </div>
         </div>

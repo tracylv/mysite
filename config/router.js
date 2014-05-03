@@ -21,6 +21,9 @@ var router = new geddy.RegExpRouter();
 
 router.get('/').to('Main.index');
 
+router.get('/users/login(.:format)').to('Users.login');
+router.get('/users/logout(.:format)').to('Users.logout');
+router.post('/users/login(.:format)').to('Users.login_post');
 router.get('/users/list(.:format)').to('Users.list');
 router.get('/users/show/:id(.:format)').to('Users.show');
 router.get('/users/signup(.:format)').to('Users.signup');

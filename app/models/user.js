@@ -16,6 +16,7 @@ var User = function () {
     this.validatesFormat('email', /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/, {message: '邮箱无效。'});
 
     User.duplicateUsernameError = '该用户名已被占用。';
+    User.loginError = '用户名或密码不正确。';
 
 //  this.validatesLength('username', {min: 6, max: 30, message: '用户名不能小于 6 个或大于 30 个字符长度。'});
     /*

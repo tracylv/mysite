@@ -1,0 +1,36 @@
+<div class="login">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userform">
+                    <form class="signupform" action="/users/login" method="post">
+                        <div class="title">
+                            <h3>用户登录</h3>
+                        </div>
+                        <div class="itemslist">
+                            <div class="item">
+                                <input name="username" type="text" placeholder="用户名" maxlength="30" value="<%= user.username %>"/>
+                            </div>
+                            <div class="item">
+                                <input name="password" type="password" placeholder="密码" maxlength="30" />
+                                <% if(user.loginError) { %>
+                                <span class="error"><%= user.loginError %></span>
+                                <%}%>
+                            </div>
+                            <div class="item checkboxitem cf">
+                                <input name="autologin" id="autologin" type="checkbox" value="1" <%= !!user.autologin ? "checked" : "" %> />
+                                <label for="autologin">下次自动登录</label>
+                            </div>
+                            <% if(user.redirecturl) { %>
+                                <input name="redirecturl" type="hidden" value="<%= user.redirecturl %>" />
+                            <%}%>
+                        </div>
+                        <div class="submit">
+                            <input class="loginsubmit submitBtn"  type="submit" value="立即登录" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

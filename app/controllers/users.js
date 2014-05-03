@@ -1,9 +1,82 @@
 var Users = function () {
 
     geddy.viewHelpers.page_info.page_title = "我的网站 - 用户";
-    geddy.viewHelpers.menu_data.active_tab = "admin";
+    //geddy.viewHelpers.menu_data.active_tab = "admin";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
+
+
+    this.login = function (req, resp, params) {
+
+        // set auto login default value
+        params.autologin = true;
+
+        if(req.headers.referer){
+            params.redirecturl = req.headers.referer;
+        }
+
+        this.respond({user: params});
+    };
+
+    this.login_post = function (req, resp, params) {
+        var self = this;
+
+        geddy.model.User.first({username: params.username, password: params.password}, function(err, user) {
+            if (err) {
+                throw err;
+            }
+            if (user) {
+
+                // set auto login
+                if(!!params.autologin == true)
+                {
+                    self.cookies.set("userid", user.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                }
+                else
+                {
+                    self.cookies.set("userid", user.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                }
+
+                // set session
+                self.session.set("username", user.nickname);
+                geddy.viewHelpers.session_obj.username = self.session.get("username");
+
+                // redirect after successful login
+                if(params.redirecturl)
+                {
+                    self.redirect(params.redirecturl);
+                }
+                else
+                {
+                    self.redirect("/");
+                }
+
+            }
+            else {
+                params.loginError = geddy.model.User.loginError;
+                self.respond({user: params}, {format: 'html', template: 'app/views/users/login'});
+            }
+        });
+    };
+
+    this.logout = function (req, resp, params) {
+
+        // clear cookie
+        this.cookies.set("userid", "", {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+
+        // clear session
+        this.session.unset("username");
+        geddy.viewHelpers.session_obj.username = "";
+
+        if(req.headers.referer)
+        {
+            this.redirect(req.headers.referer);
+        }
+        else
+        {
+            this.redirect("/");
+        }
+    };
 
     this.list = function (req, resp, params) {
         var self = this;
