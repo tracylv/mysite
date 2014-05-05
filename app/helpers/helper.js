@@ -24,9 +24,20 @@ var session_obj = {
 };
 
 
+var requireAuth = function () {
+
+    var username = this.session.get("username");
+
+    if (!username)
+    {
+        this.redirect('users/login');
+    }
+};
 
 
 
 exports.page_info = page_info;
 exports.menu_data = menu_data;
 exports.session_obj = session_obj;
+
+exports.requireAuth = requireAuth;
