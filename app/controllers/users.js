@@ -30,16 +30,20 @@ var Users = function () {
                 // set auto login
                 if(!!params.autologin == true)
                 {
-                    self.cookies.set("userid", user.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                    self.cookies.set("userid", user.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
                 }
                 else
                 {
-                    self.cookies.set("userid", user.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                    self.cookies.set("userid", user.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
                 }
 
                 // set session
+                self.session.set("userid", user.id);
                 self.session.set("username", user.nickname);
+                self.session.set("userrole", geddy.model.User.userrole.user);
+                geddy.viewHelpers.session_obj.userid = self.session.get("userid");
                 geddy.viewHelpers.session_obj.username = self.session.get("username");
+                geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
 
                 // redirect after successful login
                 if(params.redirecturl)
@@ -66,8 +70,10 @@ var Users = function () {
         this.cookies.set("userid", "", {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
 
         // clear session
+        this.session.unset("userid");
         this.session.unset("username");
         this.session.unset("userrole");
+        geddy.viewHelpers.session_obj.userid = "";
         geddy.viewHelpers.session_obj.username = "";
         geddy.viewHelpers.session_obj.userrole = "";
 

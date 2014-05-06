@@ -30,28 +30,30 @@ var Admins = function () {
                 // set auto login
                 if(!!params.autologin == true)
                 {
-                    self.cookies.set("userid", admin.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                    self.cookies.set("userid", admin.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
                 }
                 else
                 {
-                    self.cookies.set("userid", admin.id, {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                    self.cookies.set("userid", admin.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
                 }
 
                 // set session
+                self.session.set("userid", admin.id);
                 self.session.set("username", admin.nickname);
+                geddy.viewHelpers.session_obj.userid = self.session.get("userid");
                 geddy.viewHelpers.session_obj.username = self.session.get("username");
 
                 if(admin.istop == true)
                 {
-                    self.session.set("userrole", "super");
+                    self.session.set("userrole", geddy.model.Admin.userrole.super);
                 }
                 else if(admin.issuper == true)
                 {
-                    self.session.set("userrole", "senior");
+                    self.session.set("userrole", geddy.model.Admin.userrole.senior);
                 }
                 else
                 {
-                    self.session.set("userrole", "junior");
+                    self.session.set("userrole", geddy.model.Admin.userrole.junior);
                 }
 
                 geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");

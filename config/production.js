@@ -19,7 +19,7 @@
 var config = {
   appName: 'Geddy App'
 , detailedErrors: false
-, hostname: null
+, hostname: "localhost"
 , port: 4000
 , model: {
     defaultAdapter: 'mongo'

@@ -18,6 +18,8 @@ var User = function () {
     User.duplicateUsernameError = '该用户名已被占用。';
     User.loginError = '用户名或密码不正确。';
 
+    User.userrole = { user: "user" };
+
 //  this.validatesLength('username', {min: 6, max: 30, message: '用户名不能小于 6 个或大于 30 个字符长度。'});
     /*
     this.validatesWithFunction('nickname', { message: '昵称不能大于20个字符长度。'}, function(nickname){
