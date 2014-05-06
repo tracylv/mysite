@@ -31,10 +31,12 @@ var Admins = function () {
                 if(!!params.autologin == true)
                 {
                     self.cookies.set("userid", admin.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                    self.cookies.set("usertype", geddy.viewHelpers.user_type.admin, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
                 }
                 else
                 {
                     self.cookies.set("userid", admin.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                    self.cookies.set("usertype", geddy.viewHelpers.user_type.admin, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
                 }
 
                 // set session

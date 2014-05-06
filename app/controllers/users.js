@@ -31,10 +31,12 @@ var Users = function () {
                 if(!!params.autologin == true)
                 {
                     self.cookies.set("userid", user.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
+                    self.cookies.set("usertype", geddy.viewHelpers.user_type.user, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", 7)});
                 }
                 else
                 {
                     self.cookies.set("userid", user.id, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+                    self.cookies.set("usertype", geddy.viewHelpers.user_type.user, {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
                 }
 
                 // set session
@@ -67,7 +69,8 @@ var Users = function () {
     this.logout = function (req, resp, params) {
 
         // clear cookie
-        this.cookies.set("userid", "", {domain : "localhost", path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+        this.cookies.set("userid", "", {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
+        this.cookies.set("usertype", "", {domain : geddy.config.hostname, path : "/", expires : geddy.date.add(new Date(), "day", -1)});
 
         // clear session
         this.session.unset("userid");

@@ -17,11 +17,15 @@ var menu_data = {
             {tab: "admin", text: "管理员入口", link: "/admins/category"}]
 };
 
-
+var user_type = {
+    user: "user",
+    admin: "admin"
+};
 
 
 
 exports.page_info = page_info;
 exports.menu_data = menu_data;
+exports.user_type = user_type;
 
 
