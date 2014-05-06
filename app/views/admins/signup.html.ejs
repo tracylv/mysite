@@ -42,7 +42,7 @@
                                 <%}%>
                             </div>
 
-                            <% if (session_obj.userrole == "super"){ %>
+                            <% if (session_obj.userrole == geddy.model.Admin.userrole.super){ %>
                             <div class="item checkboxitem cf">
                                 <input name="issuper" id="issuper" type="checkbox" value="1" <%= admin.issuper == true ? "checked" : "" %> />
                                 <label for="issuper">高级管理员</label>

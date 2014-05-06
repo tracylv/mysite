@@ -5,13 +5,14 @@ var session_obj = {
     userrole: ""
 };
 
-var requireAuth = function () {
+var requireAuth = function (usertype) {
 
     var userid = this.session.get("userid");
     var username = this.session.get("username");
     var userrole = this.session.get("userrole");
 
-    if (!username)
+    // if don't have some session or session lost
+    if (!userid || !username || !userrole)
     {
         this.redirect('users/login');
     }
