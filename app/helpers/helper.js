@@ -18,13 +18,10 @@ var menu_data = {
 };
 
 
-var session_obj = {
-    userid: "",
-    username: "",
-    userrole: ""
-};
+
+
 
 exports.page_info = page_info;
 exports.menu_data = menu_data;
-exports.session_obj = session_obj;
+
 
