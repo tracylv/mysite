@@ -6,6 +6,9 @@ var session_obj = {
 };
 
 var requireAuth = function (authType) {
+
+  return function(){
+
     var self = this;
 
     // sessions
@@ -134,8 +137,7 @@ var requireAuth = function (authType) {
             throw new geddy.errors.UnauthorizedError();
         }
     }
-
-
+  };
 
 };
 
