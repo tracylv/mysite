@@ -6,6 +6,9 @@ var Users = function () {
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
 
+    this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.junior), { only: ['list', 'show', 'edit', 'update', 'remove'] });
+
+
     this.login = function (req, resp, params) {
 
         // set auto login default value

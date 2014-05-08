@@ -30,13 +30,13 @@ var requireAuth = function (authType) {
             // for users
             if(authType == geddy.model.User.userrole.user)
             {
-                self.redirect('users/login');
+                self.redirect('/users/login');
             }
 
             // for admins
             if(authType == geddy.model.Admin.userrole.junior || authType == geddy.model.Admin.userrole.senior || authType == geddy.model.Admin.userrole.super)
             {
-                self.redirect('admins/login');
+                self.redirect('/admins/login');
             }
         }
         else
@@ -59,7 +59,7 @@ var requireAuth = function (authType) {
                         geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
                     }
                     else {
-                        self.redirect('users/login');
+                        self.redirect('/users/login');
                     }
                 });
 
@@ -95,7 +95,7 @@ var requireAuth = function (authType) {
 
                     }
                     else {
-                        self.redirect('admins/login');
+                        self.redirect('/admins/login');
                     }
                 });
 
