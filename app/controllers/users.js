@@ -5,7 +5,7 @@ var Users = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
-
+    this.before(geddy.viewHelpers.requireAuth, { only: ['login', 'login_post', 'logout', 'signup', 'signup_post'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.junior), { only: ['list', 'show', 'edit', 'update', 'remove'] });
 
 
@@ -46,9 +46,6 @@ var Users = function () {
                 self.session.set("userid", user.id);
                 self.session.set("username", user.nickname);
                 self.session.set("userrole", geddy.model.User.userrole.user);
-                geddy.viewHelpers.session_obj.userid = self.session.get("userid");
-                geddy.viewHelpers.session_obj.username = self.session.get("username");
-                geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
 
                 // redirect after successful login
                 if(params.redirecturl)
@@ -79,9 +76,6 @@ var Users = function () {
         this.session.unset("userid");
         this.session.unset("username");
         this.session.unset("userrole");
-        geddy.viewHelpers.session_obj.userid = "";
-        geddy.viewHelpers.session_obj.username = "";
-        geddy.viewHelpers.session_obj.userrole = "";
 
         if(req.headers.referer)
         {

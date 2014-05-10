@@ -5,6 +5,8 @@ var Advices = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+    this.before(geddy.viewHelpers.requireAuth, { only: ['index'] });
+
     this.index = function (req, resp, params) {
         this.respond({params: params});
     };

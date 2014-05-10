@@ -35,7 +35,7 @@
                         <div class="submit cf">
                             <a href="/admins/edit/<%= admin.id %>">修改管理员</a>
                             <input class="deletesubmit submitBtn"  type="submit" value="删除管理员" />
-                            <a href="<%= session_obj.userrole == "super" ? "/admins/category" : "/admins/list"; %>">返回管理员列表</a>
+                            <a href="<%= session.get("userrole") == geddy.model.Admin.userrole.super ? "/admins/category" : "/admins/list"; %>">返回管理员列表</a>
                         </div>
                     </form>
                 </div>

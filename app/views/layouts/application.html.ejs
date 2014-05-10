@@ -39,13 +39,13 @@
 
         <!-- header start -->
         <div id="header">
-            <%= partial('header'); %>
+            <%= partial('header', { error: false, username: session.get("username") }); %>
         </div>
         <!-- header end -->
 
         <!-- menu start -->
         <div id="nav">
-            <%= partial('menu'); %>
+            <%= partial('menu', { error: false, userrole: session.get("userrole") }); %>
         </div>
         <!-- menu end -->
 

@@ -5,7 +5,7 @@
                 <ul class="cf">
             <% for (var i = 0, len = menu_data.data.length; i < len; i++ )
                {
-                   if((menu_data.data[i].tab == "admin" && (session_obj.userrole == "super" || session_obj.userrole == "senior" || session_obj.userrole == "junior")) || menu_data.data[i].tab != "admin" )
+                   if((menu_data.data[i].tab == "admin" && (userrole == geddy.model.Admin.userrole.super || userrole == geddy.model.Admin.userrole.senior || userrole == geddy.model.Admin.userrole.junior)) || menu_data.data[i].tab != "admin" )
                    {
             %>
                     <li><a class="<%= menu_data.active_tab == menu_data.data[i].tab ? "active" : ""; %>" href="<%= menu_data.data[i].link %>"><%= menu_data.data[i].text %></a></li>

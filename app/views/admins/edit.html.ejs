@@ -41,6 +41,8 @@
                                 <span class="error"><%= admin.errors.email %></span>
                                 <%}%>
                             </div>
+
+                            <% if (session.get("userrole") == geddy.model.Admin.userrole.super){ %>
                             <div class="item checkboxitem cf">
                                 <input id="issuper" name="issuper" type="checkbox" value="1" <%= admin.issuper == true ? "checked" : "" %> />
                                 <label for="issuper">高级管理员</label>
@@ -48,10 +50,11 @@
                                 <span class="error"><%= admin.errors.issuper %></span>
                                 <%}%>
                             </div>
+                            <% } %>
                         </div>
                         <div class="submit cf">
                             <input class="editsubmit submitBtn"  type="submit" value="保存修改" />
-                            <a class="backlist" href="<%= session_obj.userrole == "super" ? "/admins/category" : "/admins/list"; %>">返回管理员列表</a>
+                            <a class="backlist" href="<%= session.get("userrole") == geddy.model.Admin.userrole.super ? "/admins/category" : "/admins/list"; %>">返回管理员列表</a>
                         </div>
                     </form>
                 </div>

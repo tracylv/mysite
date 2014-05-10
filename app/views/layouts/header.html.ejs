@@ -4,11 +4,12 @@
             <div class="br1 left">
                 <a class="logo" href="http://www.tl.com"><img width="114" height="100" src="/img/logo.jpg" alt="TL"/></a>
             </div>
+        <% if (!error) {%>
             <div class="br2 right">
                 <ul class="cf">
-                 <% if(session_obj.username.length > 0)
+                 <% if(!!username)
                     { %>
-                    <li><span class="welcome">欢迎您, <%= session_obj.username %></span></li>
+                    <li><span class="welcome">欢迎您, <%= username %></span></li>
                     <li><a class="logout" href="/users/logout">登出</a></li>
                  <% }
                     else
@@ -18,6 +19,8 @@
                  <% } %>
                 </ul>
             </div>
+
+        <% } %>
         </div>
     </div>
 </div>

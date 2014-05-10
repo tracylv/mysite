@@ -1,8 +1,7 @@
 
-var session_obj = {
-    userid: "",
-    username: "",
-    userrole: ""
+var user_type = {
+    user: "user",
+    admin: "admin"
 };
 
 var requireAuth = function (authType) {
@@ -54,9 +53,6 @@ var requireAuth = function (authType) {
                         self.session.set("userid", user.id);
                         self.session.set("username", user.nickname);
                         self.session.set("userrole", geddy.model.User.userrole.user);
-                        geddy.viewHelpers.session_obj.userid = self.session.get("userid");
-                        geddy.viewHelpers.session_obj.username = self.session.get("username");
-                        geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
                     }
                     else {
                         self.redirect('/users/login');
@@ -76,8 +72,6 @@ var requireAuth = function (authType) {
                         // set session
                         self.session.set("userid", admin.id);
                         self.session.set("username", admin.nickname);
-                        geddy.viewHelpers.session_obj.userid = self.session.get("userid");
-                        geddy.viewHelpers.session_obj.username = self.session.get("username");
 
                         if(admin.istop == true)
                         {
@@ -91,8 +85,6 @@ var requireAuth = function (authType) {
                         {
                             self.session.set("userrole", geddy.model.Admin.userrole.junior);
                         }
-                        geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
-
                     }
                     else {
                         self.redirect('/admins/login');
@@ -143,5 +135,5 @@ var requireAuth = function (authType) {
 
 
 
-exports.session_obj = session_obj;
+exports.user_type = user_type;
 exports.requireAuth = requireAuth;

@@ -5,6 +5,7 @@ var Admins = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+    this.before(geddy.viewHelpers.requireAuth, { only: ['login', 'login_post'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.junior), { only: ['category'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.senior), { only: ['list', 'show', 'signup', 'signup_post', 'edit', 'update', 'remove'] });
 
@@ -45,8 +46,6 @@ var Admins = function () {
                 // set session
                 self.session.set("userid", admin.id);
                 self.session.set("username", admin.nickname);
-                geddy.viewHelpers.session_obj.userid = self.session.get("userid");
-                geddy.viewHelpers.session_obj.username = self.session.get("username");
 
                 if(admin.istop == true)
                 {
@@ -60,8 +59,6 @@ var Admins = function () {
                 {
                     self.session.set("userrole", geddy.model.Admin.userrole.junior);
                 }
-
-                geddy.viewHelpers.session_obj.userrole = self.session.get("userrole");
 
                 // redirect after successful login
                 if(params.redirecturl)
@@ -157,7 +154,7 @@ var Admins = function () {
                 }
 
                 var redirecturl = "/admins/list";
-                if(geddy.viewHelpers.session_obj.userrole == "super"){
+                if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
                     redirecturl = "/admins/category";
                 }
 
@@ -246,7 +243,7 @@ var Admins = function () {
                     }
 
                     var redirecturl = "/admins/list";
-                    if(geddy.viewHelpers.session_obj.userrole == "super"){
+                    if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
                         redirecturl = "/admins/category";
                     }
                     self.redirect(redirecturl);
