@@ -90,16 +90,24 @@ var Admins = function () {
             issuper = true;
         }
 
-        geddy.model.Admin.all({ "issuper": issuper, not: {istop: true}},function(err, admins){
-            if(err){
-                throw err;
-            }
-            self.respondWith(admins, {type: "Admin"});
-        });
+        if(issuper == true && self.session.get("userrole") != geddy.model.Admin.userrole.super)
+        {
+            throw new geddy.errors.UnauthorizedError();
+        }
+        else
+        {
+            geddy.model.Admin.all({ "issuper": issuper, not: {istop: true}},function(err, admins){
+                if(err){
+                    throw err;
+                }
+                self.respondWith(admins, {type: "Admin"});
+            });
+        }
     };
 
     this.show = function (req, resp, params) {
         var self = this;
+        var userrole = self.session.get("userrole");
 
         geddy.model.Admin.first(params.id, function(err, admin) {
             if (err) {
@@ -109,11 +117,17 @@ var Admins = function () {
                 throw new geddy.errors.NotFoundError();
             }
             else {
-                self.respondWith(admin);
+                if((userrole == geddy.model.Admin.userrole.senior && (admin.issuper == true || admin.istop == true)) || (userrole == geddy.model.Admin.userrole.super && admin.istop == true))
+                {
+                    throw new geddy.errors.UnauthorizedError();
+                }
+                else
+                {
+                    self.respondWith(admin);
+                }
             }
         });
     };
-
 
     this.signup = function (req, resp, params) {
         this.respond({admin: params});
@@ -123,6 +137,7 @@ var Admins = function () {
         var self = this;
         var admin = geddy.model.Admin.create(params);
         var duplicateuser = false;
+        var userrole = self.session.get("userrole");
 
         // check if user have already existed
         geddy.model.Admin.first({ username : admin.username}, function(err, curradmin) {
@@ -148,23 +163,31 @@ var Admins = function () {
             this.respond({admin: admin}, {format: 'html', template: 'app/views/admins/signup'});
         }
         else {
-            admin.save(function(err, data) {
-                if (err) {
-                    throw err;
-                }
+            if((userrole == geddy.model.Admin.userrole.senior && (admin.issuper == true || admin.istop == true)) || (userrole == geddy.model.Admin.userrole.super && admin.istop == true))
+            {
+                throw new geddy.errors.UnauthorizedError();
+            }
+            else
+            {
+                admin.save(function(err, data) {
+                    if (err) {
+                        throw err;
+                    }
 
-                var redirecturl = "/admins/list";
-                if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
-                    redirecturl = "/admins/category";
-                }
+                    var redirecturl = "/admins/list";
+                    if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
+                        redirecturl = "/admins/category";
+                    }
 
-                self.redirect(redirecturl);
-            });
+                    self.redirect(redirecturl);
+                });
+            }
         }
     };
 
     this.edit = function (req, resp, params) {
         var self = this;
+        var userrole = self.session.get("userrole");
 
         geddy.model.Admin.first(params.id, function(err, admin) {
             if (err) {
@@ -174,7 +197,14 @@ var Admins = function () {
                 throw new geddy.errors.BadRequestError();
             }
             else {
-                self.respondWith(admin);
+                if((userrole == geddy.model.Admin.userrole.senior && (admin.issuper == true || admin.istop == true)) || (userrole == geddy.model.Admin.userrole.super && admin.istop == true))
+                {
+                    throw new geddy.errors.UnauthorizedError();
+                }
+                else
+                {
+                    self.respondWith(admin);
+                }
             }
         });
     };
@@ -182,6 +212,7 @@ var Admins = function () {
     this.update = function (req, resp, params) {
         var self = this;
         var duplicateuser = false;
+        var userrole = self.session.get("userrole");
 
         geddy.model.Admin.first(params.id, function(err, admin) {
             if (err) {
@@ -216,18 +247,26 @@ var Admins = function () {
                 self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/edit'});
             }
             else {
-                admin.save(function(err, data) {
-                    if (err) {
-                        throw err;
-                    }
-                    self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/show'});
-                });
+                if((userrole == geddy.model.Admin.userrole.senior && (admin.issuper == true || admin.istop == true)) || (userrole == geddy.model.Admin.userrole.super && admin.istop == true))
+                {
+                    throw new geddy.errors.UnauthorizedError();
+                }
+                else
+                {
+                    admin.save(function(err, data) {
+                        if (err) {
+                            throw err;
+                        }
+                        self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/show'});
+                    });
+                }
             }
         });
     };
 
     this.remove = function (req, resp, params) {
         var self = this;
+        var userrole = self.session.get("userrole");
 
         geddy.model.Admin.first(params.id, function(err, admin) {
             if (err) {
@@ -237,17 +276,25 @@ var Admins = function () {
                 throw new geddy.errors.BadRequestError();
             }
             else {
-                geddy.model.Admin.remove(params.id, function(err) {
-                    if (err) {
-                        throw err;
-                    }
 
-                    var redirecturl = "/admins/list";
-                    if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
-                        redirecturl = "/admins/category";
-                    }
-                    self.redirect(redirecturl);
-                });
+                if((userrole == geddy.model.Admin.userrole.senior && (admin.issuper == true || admin.istop == true)) || (userrole == geddy.model.Admin.userrole.super && admin.istop == true))
+                {
+                    throw new geddy.errors.UnauthorizedError();
+                }
+                else
+                {
+                    geddy.model.Admin.remove(params.id, function(err) {
+                        if (err) {
+                            throw err;
+                        }
+
+                        var redirecturl = "/admins/list";
+                        if(self.session.get("userrole") == geddy.model.Admin.userrole.super){
+                            redirecturl = "/admins/category";
+                        }
+                        self.redirect(redirecturl);
+                    });
+                }
             }
         });
     };
