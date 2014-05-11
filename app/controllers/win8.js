@@ -5,7 +5,7 @@ var Win8 = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
-    this.before(geddy.viewHelpers.requireAuth, { only: ['index'] });
+    this.before(geddy.viewHelpers.requireAuth(null), { only: ['index'] });
 
     this.index = function (req, resp, params) {
         this.respond({params: params}, {template: 'app/views/win8/index'});

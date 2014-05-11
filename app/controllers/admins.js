@@ -5,7 +5,7 @@ var Admins = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
-    this.before(geddy.viewHelpers.requireAuth, { only: ['login', 'login_post'] });
+    this.before(geddy.viewHelpers.requireAuth(null), { only: ['login', 'login_post'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.junior), { only: ['category'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.Admin.userrole.senior), { only: ['list', 'show', 'signup', 'signup_post', 'edit', 'update', 'remove'] });
 
