@@ -15,7 +15,7 @@ var Admins = function () {
         // set auto login default value
         params.autologin = true;
 
-        if(req.headers.referer && !geddy.string.include(req.headers.referer, "signup")){
+        if(req.headers.referer && !geddy.string.include(req.headers.referer, "signup") && !geddy.string.include(req.headers.referer, "login")){
             params.redirecturl = req.headers.referer;
         }
 
