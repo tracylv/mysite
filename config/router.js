@@ -43,6 +43,9 @@ router.get('/admins/edit/:id(.:format)').to('Admins.edit');
 router.post('/admins/edit/:id(.:format)').to('Admins.update');
 router.post('/admins/delete/:id(.:format)').to('Admins.remove');
 
+router.get('/settings/profile(.:format)').to('Settings.profile');
+router.post('/settings/profile(.:format)').to('Settings.profile_post');
+
 router.get('/lives/index(.:format)').to('Lives.index');
 
 router.get('/games/index(.:format)').to('Games.index');

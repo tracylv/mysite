@@ -1,0 +1,123 @@
+<div class="profile">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userform">
+
+                    <% if(user.signupSuccess)
+                    { %>
+                    <div class="signupsuccess">
+                        <a href="/users/login">注册成功，请登录。</a>
+                    </div>
+                    <% }
+                    else
+                    { %>
+                    <form class="signupform" action="/users/signup" method="post">
+                        <div class="title">
+                            <h3>用户注册</h3>
+                        </div>
+                        <div class="itemslist">
+                            <div class="item">
+                                <input name="username" type="text" placeholder="用户名" maxlength="30" value="<%= user.username %>"/>
+                                <% if(user.errors && user.errors.username) { %>
+                                <span class="error"><%= user.errors.username %></span>
+                                <%}%>
+                                <% if(user.dupicateerror) { %>
+                                <span class="error"><%= user.dupicateerror %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="password" type="password" placeholder="密码" maxlength="30" value="<%= user.password %>" />
+                                <% if(user.errors && user.errors.password) { %>
+                                <span class="error"><%= user.errors.password %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="confirmpassword" type="password" placeholder="确认密码" maxlength="30" value="<%= user.confirmpassword %>"/>
+                                <% if(user.errors && user.errors.confirmpassword) { %>
+                                <span class="error"><%= user.errors.confirmpassword %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="nickname" type="text" placeholder="昵称" maxlength="20" value="<%= user.nickname %>" />
+                                <% if(user.errors && user.errors.nickname) { %>
+                                <span class="error"><%= user.errors.nickname %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="email" type="text" placeholder="邮箱" value="<%= user.email %>" />
+                                <% if(user.errors && user.errors.email) { %>
+                                <span class="error"><%= user.errors.email %></span>
+                                <%}%>
+                            </div>
+                        </div>
+                        <div class="submit">
+                            <input class="signupsubmit submitBtn"  type="submit" value="立即注册" />
+                        </div>
+                    </form>
+                    <% } %>
+
+                </div>
+            </div>
+
+            <div class="br2 left">
+                <div class="userform">
+
+                    <% if(user.signupSuccess)
+                    { %>
+                    <div class="signupsuccess">
+                        <a href="/users/login">注册成功，请登录。</a>
+                    </div>
+                    <% }
+                    else
+                    { %>
+                    <form class="signupform" action="/users/signup" method="post">
+                        <div class="title">
+                            <h3>用户注册</h3>
+                        </div>
+                        <div class="itemslist">
+                            <div class="item">
+                                <input name="username" type="text" placeholder="用户名" maxlength="30" value="<%= user.username %>"/>
+                                <% if(user.errors && user.errors.username) { %>
+                                <span class="error"><%= user.errors.username %></span>
+                                <%}%>
+                                <% if(user.dupicateerror) { %>
+                                <span class="error"><%= user.dupicateerror %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="password" type="password" placeholder="密码" maxlength="30" value="<%= user.password %>" />
+                                <% if(user.errors && user.errors.password) { %>
+                                <span class="error"><%= user.errors.password %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="confirmpassword" type="password" placeholder="确认密码" maxlength="30" value="<%= user.confirmpassword %>"/>
+                                <% if(user.errors && user.errors.confirmpassword) { %>
+                                <span class="error"><%= user.errors.confirmpassword %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="nickname" type="text" placeholder="昵称" maxlength="20" value="<%= user.nickname %>" />
+                                <% if(user.errors && user.errors.nickname) { %>
+                                <span class="error"><%= user.errors.nickname %></span>
+                                <%}%>
+                            </div>
+                            <div class="item">
+                                <input name="email" type="text" placeholder="邮箱" value="<%= user.email %>" />
+                                <% if(user.errors && user.errors.email) { %>
+                                <span class="error"><%= user.errors.email %></span>
+                                <%}%>
+                            </div>
+                        </div>
+                        <div class="submit">
+                            <input class="signupsubmit submitBtn"  type="submit" value="立即注册" />
+                        </div>
+                    </form>
+                    <% } %>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

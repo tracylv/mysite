@@ -1,7 +1,7 @@
 var Users = function () {
 
     geddy.viewHelpers.page_info.page_title = "我的网站 - 用户";
-    //geddy.viewHelpers.menu_data.active_tab = "admin";
+    geddy.viewHelpers.menu_data.active_tab = "admin";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
