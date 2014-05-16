@@ -29,13 +29,17 @@ var requireAuth = function (authType) {
             // for users
             if(authType == geddy.model.User.userrole.user)
             {
-                self.redirect('/users/login');
+                //self.redirect('/users/login');
+                self.respond({user: { redirecturl : self.request.controller.url, autologin: true }}, {format: 'html', template: 'app/views/users/login'});
+                return;
             }
 
             // for admins
             if(authType == geddy.model.Admin.userrole.junior || authType == geddy.model.Admin.userrole.senior || authType == geddy.model.Admin.userrole.super)
             {
-                self.redirect('/admins/login');
+                //self.redirect('/admins/login');
+                self.respond({admin: { redirecturl : self.request.controller.url, autologin: true }}, {format: 'html', template: 'app/views/admins/login'});
+                return;
             }
         }
         else
@@ -55,7 +59,9 @@ var requireAuth = function (authType) {
                         self.session.set("userrole", geddy.model.User.userrole.user);
                     }
                     else {
-                        self.redirect('/users/login');
+                        //self.redirect('/users/login');
+                        self.respond({user: { redirecturl : self.request.controller.url, autologin: true }}, {format: 'html', template: 'app/views/users/login'});
+                        return;
                     }
                 });
 
@@ -87,7 +93,9 @@ var requireAuth = function (authType) {
                         }
                     }
                     else {
-                        self.redirect('/admins/login');
+                        //self.redirect('/admins/login');
+                        self.respond({admin: { redirecturl : self.request.controller.url, autologin: true }}, {format: 'html', template: 'app/views/admins/login'});
+                        return;
                     }
                 });
 
