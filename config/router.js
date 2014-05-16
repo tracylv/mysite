@@ -44,7 +44,8 @@ router.post('/admins/edit/:id(.:format)').to('Admins.update');
 router.post('/admins/delete/:id(.:format)').to('Admins.remove');
 
 router.get('/settings/profile(.:format)').to('Settings.profile');
-router.post('/settings/profile(.:format)').to('Settings.profile_post');
+router.post('/settings/profile_pwd(.:format)').to('Settings.profile_pwd');
+router.post('/settings/profile_info(.:format)').to('Settings.profile_info');
 
 router.get('/lives/index(.:format)').to('Lives.index');
 
