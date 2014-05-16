@@ -9,7 +9,7 @@
                 <ul class="cf">
                  <% if(!!username)
                     { %>
-                    <li><span class="welcome">欢迎您, <%= username %></span></li>
+                    <li><span class="welcome">欢迎您, <a href="/settings/profile"><%= username %></a></span></li>
                     <li><a class="logout" href="/users/logout">登出</a></li>
                  <% }
                     else
