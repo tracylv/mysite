@@ -179,7 +179,7 @@ var Users = function () {
 
     this.update = function (req, resp, params) {
         var self = this;
-        var duplicateuser = false;
+        var duplicate = false;
 
         geddy.model.User.first(params.id, function(err, user) {
             if (err) {
@@ -194,14 +194,27 @@ var Users = function () {
                     }
                     if (curruser) {
                         user.dupicateerror = geddy.model.User.duplicateUsernameError;
-                        duplicateuser = true;
+                        duplicate = true;
+                    }
+                });
+            }
+
+            // check if user have already existed
+            if(user.email != params.email) {
+                geddy.model.User.first({ email : params.email}, function(err, curruser) {
+                    if (err) {
+                        throw err;
+                    }
+                    if (curruser) {
+                        user.duplicateEmail = geddy.model.User.duplicateEmailError;
+                        duplicate = true;
                     }
                 });
             }
 
             user.updateProperties(params);
 
-            if (!user.isValid() || duplicateuser == true) {
+            if (!user.isValid() || duplicate == true) {
                 self.respond({user: user}, {format: 'html', template: 'app/views/users/edit'});
             }
             else {

@@ -222,7 +222,7 @@ var Admins = function () {
 
     this.update = function (req, resp, params) {
         var self = this;
-        var duplicateuser = false;
+        var duplicate = false;
         var userrole = self.session.get("userrole");
 
         geddy.model.Admin.first(params.id, function(err, admin) {
@@ -247,14 +247,26 @@ var Admins = function () {
                     }
                     if (curradmin) {
                         admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
-                        duplicateuser = true;
+                        duplicate = true;
+                    }
+                });
+            }
+
+            if(admin.email != params.email) {
+                geddy.model.Admin.first({ email : params.email}, function(err, curradmin) {
+                    if (err) {
+                        throw err;
+                    }
+                    if (curradmin) {
+                        admin.duplicateEmail = geddy.model.Admin.duplicateEmailError;
+                        duplicate = true;
                     }
                 });
             }
 
             admin.updateProperties(params);
 
-            if (!admin.isValid() || duplicateuser == true) {
+            if (!admin.isValid() || duplicate == true) {
                 self.respond({admin: admin}, {format: 'html', template: 'app/views/admins/edit'});
             }
             else {

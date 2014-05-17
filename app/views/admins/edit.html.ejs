@@ -40,6 +40,9 @@
                                 <% if(admin.errors && admin.errors.email) { %>
                                 <span class="error"><%= admin.errors.email %></span>
                                 <%}%>
+                                <% if(admin.duplicateEmail) { %>
+                                <span class="error"><%= admin.duplicateEmail %></span>
+                                <%}%>
                             </div>
 
                             <% if (session.get("userrole") == geddy.model.Admin.userrole.super){ %>
