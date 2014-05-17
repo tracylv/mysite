@@ -16,6 +16,7 @@ var User = function () {
     this.validatesFormat('email', /^[\w-]+(\.[\w-]+)*@[\w-]+(\.[\w-]+)+$/, {message: '邮箱无效。'});
 
     User.duplicateUsernameError = '该用户名已被占用。';
+    User.duplicateEmailError = '该邮箱己被注册。';
     User.loginError = '用户名或密码不正确。';
     User.oldPwdWrongInfo = '旧密码不正确。';
 

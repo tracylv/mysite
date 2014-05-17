@@ -122,7 +122,7 @@ var Users = function () {
     this.signup_post = function (req, resp, params) {
         var self = this;
         var user = geddy.model.User.create(params);
-        var duplicateuser = false;
+        var duplicate = false;
 
         // check if user have already existed
         geddy.model.User.first({ username : user.username}, function(err, curruser) {
@@ -131,11 +131,22 @@ var Users = function () {
             }
             if (curruser) {
                 user.dupicateerror = geddy.model.User.duplicateUsernameError;
-                duplicateuser = true;
+                duplicate = true;
             }
         });
 
-        if (!user.isValid() || duplicateuser == true) {
+        // check if the email had been used.
+        geddy.model.User.first({ email : user.email }, function(err, curruser) {
+            if (err) {
+                throw err;
+            }
+            if (curruser) {
+                user.duplicateEmail = geddy.model.User.duplicateEmailError;
+                duplicate = true;
+            }
+        });
+
+        if (!user.isValid() || duplicate == true) {
             self.respond({user: user}, {format: 'html', template: 'app/views/users/signup'});
         }
         else {

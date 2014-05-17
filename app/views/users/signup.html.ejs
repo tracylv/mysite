@@ -49,6 +49,9 @@
                                 <% if(user.errors && user.errors.email) { %>
                                 <span class="error"><%= user.errors.email %></span>
                                 <%}%>
+                                <% if(user.duplicateEmail) { %>
+                                <span class="error"><%= user.duplicateEmail %></span>
+                                <%}%>
                             </div>
                         </div>
                         <div class="submit">

@@ -136,7 +136,7 @@ var Admins = function () {
     this.signup_post = function (req, resp, params) {
         var self = this;
         var admin = geddy.model.Admin.create(params);
-        var duplicateuser = false;
+        var duplicate = false;
         var userrole = self.session.get("userrole");
 
         // check if user have already existed
@@ -146,7 +146,18 @@ var Admins = function () {
             }
             if (curradmin) {
                 admin.dupicateerror = geddy.model.Admin.duplicateUsernameError;
-                duplicateuser = true;
+                duplicate = true;
+            }
+        });
+
+        // check if the email had been used.
+        geddy.model.Admin.first({ email : admin.email }, function(err, curradmin) {
+            if (err) {
+                throw err;
+            }
+            if (curradmin) {
+                admin.duplicateEmail = geddy.model.Admin.duplicateEmailError;
+                duplicate = true;
             }
         });
 
@@ -159,7 +170,7 @@ var Admins = function () {
             admin.updateProperties({issuper: true});
         }
 
-        if (!admin.isValid() || duplicateuser == true) {
+        if (!admin.isValid() || duplicate == true) {
             this.respond({admin: admin}, {format: 'html', template: 'app/views/admins/signup'});
         }
         else {
