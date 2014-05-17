@@ -47,149 +47,111 @@ var Settings = function () {
         var self = this;
         var userid = self.session.get("userid");
         var userrole = self.session.get("userrole");
+        var model;
 
         if(userrole == geddy.model.User.userrole.user)
         {
-            geddy.model.User.first(userid, function(err, user) {
-                if (err) {
-                    throw err;
-                }
-                if (!user) {
-                    throw new geddy.errors.BadRequestError();
-                }
-                else {
-
-                    if(user.password != params.oldpassword)
-                    {
-                        user.oldPwdWrong = geddy.model.User.oldPwdWrongInfo;
-                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                    }
-                    else
-                    {
-                        user.updateProperties({ password : params.password, confirmpassword : params.confirmpassword });
-
-                        if (!user.isValid()) {
-                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                        }
-                        else {
-                            user.save(function(err, data) {
-                                if (err) {
-                                    throw err;
-                                }
-
-                                user.changePwdSuccess = true;
-                                self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                            });
-                        }
-
-                    }
-
-                }
-            });
+            model = geddy.model.User;
         }
         else if(userrole == geddy.model.Admin.userrole.junior || userrole == geddy.model.Admin.userrole.senior || userrole == geddy.model.Admin.userrole.super)
         {
-            geddy.model.Admin.first(userid, function(err, user) {
-                if (err) {
-                    throw err;
-                }
-                if (!user) {
-                    throw new geddy.errors.BadRequestError();
-                }
-                else {
+            model = geddy.model.Admin;
+        }
 
-                    if(user.password != params.oldpassword)
-                    {
-                        user.oldPwdWrong = geddy.model.User.oldPwdWrongInfo;
+        model.first(userid, function(err, user) {
+            if (err) {
+                throw err;
+            }
+            if (!user) {
+                throw new geddy.errors.BadRequestError();
+            }
+            else {
+
+                if(user.password != params.oldpassword)
+                {
+                    user.oldPwdWrong = geddy.model.User.oldPwdWrongInfo;
+                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                }
+                else
+                {
+                    user.updateProperties({ password : params.password, confirmpassword : params.confirmpassword });
+
+                    if (!user.isValid()) {
                         self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
                     }
-                    else
-                    {
-                        user.updateProperties({ password : params.password, confirmpassword : params.confirmpassword });
+                    else {
+                        user.save(function(err, data) {
+                            if (err) {
+                                throw err;
+                            }
 
-                        if (!user.isValid()) {
+                            user.changePwdSuccess = true;
                             self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                        }
-                        else {
-                            user.save(function(err, data) {
-                                if (err) {
-                                    throw err;
-                                }
-
-                                user.changePwdSuccess = true;
-                                self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                            });
-                        }
-
+                        });
                     }
 
                 }
-            });
-        }
+
+            }
+        });
     };
 
     this.profile_info = function (req, resp, params) {
         var self = this;
+        var duplicate = false;
         var userid = self.session.get("userid");
         var userrole = self.session.get("userrole");
 
+        var model;
         if(userrole == geddy.model.User.userrole.user)
         {
-            geddy.model.User.first(userid, function(err, user) {
-                if (err) {
-                    throw err;
-                }
-                if (!user) {
-                    throw new geddy.errors.BadRequestError();
-                }
-                else {
-                    user.updateProperties({ nickname : params.nickname, email : params.email });
-
-                    if (!user.isValid()) {
-                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                    }
-                    else {
-                        user.save(function(err, data) {
-                            if (err) {
-                                throw err;
-                            }
-
-                            user.changeInfoSuccess = true;
-                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                        });
-                    }
-                }
-            });
+            model = geddy.model.User;
         }
         else if(userrole == geddy.model.Admin.userrole.junior || userrole == geddy.model.Admin.userrole.senior || userrole == geddy.model.Admin.userrole.super)
         {
-            geddy.model.Admin.first(userid, function(err, user) {
-                if (err) {
-                    throw err;
+            model = geddy.model.Admin;
+        }
+
+        model.first(userid, function(err, user) {
+            if (err) {
+                throw err;
+            }
+            if (!user) {
+                throw new geddy.errors.BadRequestError();
+            }
+            else {
+
+                // check if user have already existed
+                if(user.email != params.email) {
+                    model.first({ email : params.email}, function(err, curruser) {
+                        if (err) {
+                            throw err;
+                        }
+                        if (curruser) {
+                            user.duplicateEmail = geddy.model.User.duplicateEmailError;
+                            duplicate = true;
+                        }
+                    });
                 }
-                if (!user) {
-                    throw new geddy.errors.BadRequestError();
+
+                user.updateProperties({ nickname : params.nickname, email : params.email });
+
+                if (!user.isValid() || duplicate == true) {
+                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
                 }
                 else {
-                    user.updateProperties({ nickname : params.nickname, email : params.email });
+                    user.save(function(err, data) {
+                        if (err) {
+                            throw err;
+                        }
 
-                    if (!user.isValid()) {
+                        user.changeInfoSuccess = true;
+                        self.session.set("username", user.nickname);
                         self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                    }
-                    else {
-                        user.save(function(err, data) {
-                            if (err) {
-                                throw err;
-                            }
-
-                            user.changeInfoSuccess = true;
-                            self.session.set("username", user.nickname);
-                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
-                        });
-                    }
+                    });
                 }
-            });
-        }
+            }
+        });
     };
 };
 
