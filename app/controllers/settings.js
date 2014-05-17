@@ -59,7 +59,30 @@ var Settings = function () {
                 }
                 else {
 
+                    if(user.password != params.oldpassword)
+                    {
+                        user.oldPwdWrong = geddy.model.User.oldPwdWrongInfo;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                    }
+                    else
+                    {
+                        user.updateProperties({ password : params.password, confirmpassword : params.confirmpassword });
 
+                        if (!user.isValid()) {
+                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                        }
+                        else {
+                            user.save(function(err, data) {
+                                if (err) {
+                                    throw err;
+                                }
+
+                                user.changePwdSuccess = true;
+                                self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                            });
+                        }
+
+                    }
 
                 }
             });
@@ -75,7 +98,30 @@ var Settings = function () {
                 }
                 else {
 
+                    if(user.password != params.oldpassword)
+                    {
+                        user.oldPwdWrong = geddy.model.User.oldPwdWrongInfo;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                    }
+                    else
+                    {
+                        user.updateProperties({ password : params.password, confirmpassword : params.confirmpassword });
 
+                        if (!user.isValid()) {
+                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                        }
+                        else {
+                            user.save(function(err, data) {
+                                if (err) {
+                                    throw err;
+                                }
+
+                                user.changePwdSuccess = true;
+                                self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                            });
+                        }
+
+                    }
 
                 }
             });
@@ -97,9 +143,21 @@ var Settings = function () {
                     throw new geddy.errors.BadRequestError();
                 }
                 else {
+                    user.updateProperties({ nickname : params.nickname, email : params.email });
 
+                    if (!user.isValid()) {
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                    }
+                    else {
+                        user.save(function(err, data) {
+                            if (err) {
+                                throw err;
+                            }
 
-
+                            user.changeInfoSuccess = true;
+                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                        });
+                    }
                 }
             });
         }
@@ -113,9 +171,22 @@ var Settings = function () {
                     throw new geddy.errors.BadRequestError();
                 }
                 else {
+                    user.updateProperties({ nickname : params.nickname, email : params.email });
 
+                    if (!user.isValid()) {
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                    }
+                    else {
+                        user.save(function(err, data) {
+                            if (err) {
+                                throw err;
+                            }
 
-
+                            user.changeInfoSuccess = true;
+                            self.session.set("username", user.nickname);
+                            self.respond({user: user}, {format: 'html', template: 'app/views/settings/profile'});
+                        });
+                    }
                 }
             });
         }

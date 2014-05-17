@@ -18,6 +18,7 @@ var Admin = function () {
 
     Admin.duplicateUsernameError = '该用户名已被占用。';
     Admin.loginError = '用户名或密码不正确。';
+    Admin.oldPwdWrongInfo = '旧密码不正确。';
 
     Admin.userrole = { junior: "junior",  // issuper = false
                        senior: "senior",  // issuper = true

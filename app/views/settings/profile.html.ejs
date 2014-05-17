@@ -3,22 +3,21 @@
         <div class="ce w12">
             <div class="br1 left">
                 <div class="userform">
-
-                    <% if(user.signupSuccess)
-                    { %>
-                    <div class="signupsuccess">
-                        <p class="pwdsuccess">密码修改成功。</p>
-                    </div>
-                    <% } %>
-                    <form class="signupform" action="/settings/profile_pwd" method="post">
+                    <form action="/settings/profile_pwd" method="post">
                         <div class="title">
                             <h3>密码修改</h3>
                         </div>
+                        <% if(user.changePwdSuccess)
+                        { %>
+                        <div class="pwdsuccess">
+                            <p>密码修改成功。</p>
+                        </div>
+                        <% } %>
                         <div class="itemslist">
                             <div class="item">
                                 <input name="oldpassword" type="password" placeholder="旧密码" maxlength="30" value="" />
-                                <% if(user.errors && user.errors.password) { %>
-                                <span class="error"><%= user.errors.password %></span>
+                                <% if(user.oldPwdWrong) { %>
+                                <span class="error"><%= user.oldPwdWrong %></span>
                                 <%}%>
                             </div>
                             <div class="item">
@@ -44,19 +43,16 @@
 
             <div class="br2 left">
                 <div class="userform">
-
-                    <% if(user.signupSuccess)
-                    { %>
-                    <div class="signupsuccess">
-                        <p class="infosuccess">个人信息修改成功。</p>
-                    </div>
-                    <% }
-                    else
-                    { %>
-                    <form class="signupform" action="/settings/profile_info" method="post">
+                    <form action="/settings/profile_info" method="post">
                         <div class="title">
                             <h3>个人信息修改</h3>
                         </div>
+                        <% if(user.changeInfoSuccess)
+                        { %>
+                        <div class="infosuccess">
+                            <p>个人信息修改成功。</p>
+                        </div>
+                        <% } %>
                         <div class="itemslist">
                             <div class="item">
                                 <input name="nickname" type="text" placeholder="昵称" maxlength="20" value="<%= user.nickname %>" />
@@ -75,8 +71,6 @@
                             <input class="submitBtn"  type="submit" value="修改个人信息" />
                         </div>
                     </form>
-                    <% } %>
-
                 </div>
             </div>
         </div>

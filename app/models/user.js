@@ -17,6 +17,7 @@ var User = function () {
 
     User.duplicateUsernameError = '该用户名已被占用。';
     User.loginError = '用户名或密码不正确。';
+    User.oldPwdWrongInfo = '旧密码不正确。';
 
     User.userrole = { user: "user" };
 
