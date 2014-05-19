@@ -6,6 +6,7 @@ var Settings = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+    this.before(geddy.viewHelpers.requireAuth(null), { only: ['forgetpwd', 'forgetpwd_post'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.User.userrole.user), { only: ['profile', 'profile_pwd', 'profile_info'] });
 
     this.profile = function (req, resp, params) {
@@ -152,6 +153,20 @@ var Settings = function () {
                 }
             }
         });
+    };
+
+    this.forgetpwd = function (req, resp, params) {
+        var self = this;
+
+        self.respond({user: params}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+
+    };
+
+    this.forgetpwd_post = function (req, resp, params) {
+        var self = this;
+
+
+
     };
 };
 
