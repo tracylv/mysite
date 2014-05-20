@@ -157,14 +157,37 @@ var Settings = function () {
 
     this.forgetpwd = function (req, resp, params) {
         var self = this;
-
+        params.isadmin = params.isadmin == "1";
         self.respond({user: params}, {format: 'html', template: 'app/views/settings/forgetpwd'});
-
     };
 
     this.forgetpwd_post = function (req, resp, params) {
         var self = this;
+        var user = geddy.model.User.create({email : params.email});
+        user.isadmin = params.isadmin == "1";
+        user.isValid();
 
+        if(user.errors && user.errors.email)
+        {
+            self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+        }
+        else
+        {
+            var model = user.isadmin ? geddy.model.Admin : geddy.model.User;
+            model.first({email: user.email}, function(err, curruser) {
+                if (err) {
+                    throw err;
+                }
+                if (!curruser) {
+                    user.notfinderror = true;
+                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                }
+                else {
+                    user.sendemailsuccess = true;
+                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                }
+            });
+        }
 
 
     };
