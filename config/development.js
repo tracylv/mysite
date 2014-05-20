@@ -49,12 +49,10 @@ var config = {
   }
 
 , email: {
-     sendoutAccount: {
         auth: {
-            user: process.env.email_sendoutAccount_user,
-            pass: process.env.email_sendoutAccount_pass
+            user: process.env.email_user,
+            pass: process.env.email_pass
         }
-     }
   }
 
 };
