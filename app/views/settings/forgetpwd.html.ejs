@@ -24,6 +24,9 @@
                                 <% if(user.notfinderror) { %>
                                 <span class="error">该邮箱未被注册过，请输入注册邮箱。</span>
                                 <%}%>
+                                <% if(user.sendemailfail) { %>
+                                <span class="error">对不起，出错了，请重试。</span>
+                                <%}%>
                             </div>
                             <% if(user.isadmin) { %>
                             <input name="isadmin" type="hidden" value="1" />

@@ -183,8 +183,17 @@ var Settings = function () {
                     self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
                 }
                 else {
-                    user.sendemailsuccess = true;
-                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+
+                    //send email out
+                    geddy.viewHelpers.sendEmail(curruser, function(){
+                        user.sendemailsuccess = true;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                    },
+                    function(){
+                        user.sendemailfail = true;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                    });
+
                 }
             });
         }
