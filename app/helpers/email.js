@@ -7,10 +7,10 @@ var sendEmail = function (user, success, fail) {
 
     // setup e-mail data with unicode symbols
     var mailOptions = {
-        from: "NoReply ✔ <my.site@outlook.com>",
-        to: "lv_tengfei@163.com",
+        from: "MySite ✔ <my.site@outlook.com>",
+        to: "Tracy Lv <lv_tengfei@163.com>",
         subject: "Hello ✔",
-        text: "Hello world ✔",
+        generateTextFromHTML: true,
         html: "<b>Hello world ✔</b>"
     };
 
