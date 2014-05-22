@@ -185,7 +185,15 @@ var Settings = function () {
                 else {
 
                     //send email out
-                    geddy.viewHelpers.sendEmail(curruser, function(){
+                    var emailopt = {
+                            url : "http://localhost:4000/emails/pwdemail",
+                            method : 'GET',
+                            data: {},
+                            to : curruser.nickname + "<" + curruser.email + ">",
+                            subject: "[MySite] 密码找回 ✔"
+                    };
+
+                    geddy.viewHelpers.sendEmail(emailopt, function(){
                         user.sendemailsuccess = true;
                         self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
                     },

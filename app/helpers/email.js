@@ -1,8 +1,21 @@
 var nodemailer = require("nodemailer");
 
-var sendEmail = function (user, success, fail) {
+var sendEmail = function (emailopt, success, fail) {
 
-    geddy.request({url: 'http://localhost:4000/emails/pwdemail', method: 'GET'}, function (err, htmldata) {
+//    emailopt:
+//    example emailopt:
+//    {
+//        url : "absolute url",
+//        method : 'GET',
+//        data: data to send on Post method
+//        to : "example.163.com",
+//        subject: "subject text"
+//    }
+//    success: it's a success callback function
+//    fail: it's a fail callback function
+
+
+    geddy.request({url: emailopt.url, data: emailopt.data, method: emailopt.method ? emailopt.method : 'GET'}, function (err, htmldata) {
         if (err) {
             fail();
         }
@@ -12,11 +25,10 @@ var sendEmail = function (user, success, fail) {
 
             // setup e-mail data with unicode symbols
             var from = "MySite ✔ <" + geddy.config.email.auth.user + ">";
-            var to = user.nickname + " <" + user.email + ">";
             var mailOptions = {
                 from: from,
-                to: to,
-                subject: "[MySite] 密码找回 ✔",
+                to: emailopt.to,
+                subject: emailopt.subject,
                 generateTextFromHTML: true,
                 html: htmldata
             };
