@@ -2,33 +2,38 @@ var nodemailer = require("nodemailer");
 
 var sendEmail = function (user, success, fail) {
 
-
-    var smtpTransport = nodemailer.createTransport("SMTP", geddy.config.email);
-
-    // setup e-mail data with unicode symbols
-    var mailOptions = {
-        from: "MySite ✔ <my.site@outlook.com>",
-        to: "Tracy Lv <lv_tengfei@163.com>",
-        subject: "Hello ✔",
-        generateTextFromHTML: true,
-        html: "<b>Hello world ✔</b>"
-    };
-
-    // send mail with defined transport object
-    smtpTransport.sendMail(mailOptions, function(error, response){
-        if(error){
-            console.log(error);
-
-            // fail callback
+    geddy.request({url: 'http://localhost:4000/emails/pwdemail', method: 'GET'}, function (err, htmldata) {
+        if (err) {
             fail();
-        }else{
-            console.log("Message sent: " + response.message);
-
-            // success callback
-            success();
         }
+        else
+        {
+            var smtpTransport = nodemailer.createTransport("SMTP", geddy.config.email);
 
-        smtpTransport.close();
+            // setup e-mail data with unicode symbols
+            var from = "MySite ✔ <" + geddy.config.email.auth.user + ">";
+            var to = user.nickname + " <" + user.email + ">";
+            var mailOptions = {
+                from: from,
+                to: to,
+                subject: "[MySite] 密码找回 ✔",
+                generateTextFromHTML: true,
+                html: htmldata
+            };
+
+            // send mail with defined transport object
+            smtpTransport.sendMail(mailOptions, function(error, response){
+                if(error){
+                    // fail callback
+                    fail();
+                }else{
+                    // success callback
+                    success();
+                }
+
+                smtpTransport.close();
+            });
+        }
     });
 };
 

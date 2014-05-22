@@ -51,6 +51,8 @@ router.post('/settings/profile_info(.:format)').to('Settings.profile_info');
 router.get('/settings/forgetpwd(.:format)').to('Settings.forgetpwd');
 router.post('/settings/forgetpwd(.:format)').to('Settings.forgetpwd_post');
 
+router.get('/emails/pwdemail(.:format)').to('Emails.pwdemail');
+
 router.get('/lives/index(.:format)').to('Lives.index');
 
 router.get('/games/index(.:format)').to('Games.index');
