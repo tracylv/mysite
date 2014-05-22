@@ -14,8 +14,7 @@ var sendEmail = function (emailopt, success, fail) {
 //    success: it's a success callback function
 //    fail: it's a fail callback function
 
-
-    geddy.request({url: emailopt.url, data: emailopt.data, method: emailopt.method ? emailopt.method : 'GET'}, function (err, htmldata) {
+    geddy.request({url: emailopt.url, headers: { data : geddy.uri.paramify(emailopt.data)}, method: emailopt.method ? emailopt.method : 'GET'}, function (err, htmldata) {
         if (err) {
             fail();
         }

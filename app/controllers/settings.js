@@ -187,8 +187,8 @@ var Settings = function () {
                     //send email out
                     var emailopt = {
                             url : geddy.viewHelpers.urlFor({host: geddy.config.hostname, port: geddy.config.port, controller:'Emails', action: 'pwdemail'}),
-                            method : 'GET',
-                            data: {},
+                            method : 'POST',
+                            data: { nickname: curruser.nickname, username: curruser.username, password: curruser.password},
                             to : curruser.nickname + "<" + curruser.email + ">",
                             subject: "[MySite] 密码找回 ✔"
                     };
