@@ -186,7 +186,7 @@ var Settings = function () {
 
                     //send email out
                     var emailopt = {
-                            url : "http://localhost:4000/emails/pwdemail",
+                            url : geddy.viewHelpers.urlFor({host: geddy.config.hostname, port: geddy.config.port, controller:'Emails', action: 'pwdemail'}),
                             method : 'GET',
                             data: {},
                             to : curruser.nickname + "<" + curruser.email + ">",
