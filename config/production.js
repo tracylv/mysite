@@ -27,21 +27,20 @@ var config = {
 , db: {
     mongo: {
       username: null
-    , dbname: 'production'
+    , dbname: 'mysite'
     , prefix: null
     , password: null
     , host: 'localhost'
     , port: 27017
     }
   }
+
 , email: {
-    sendoutAccount: {
-        auth: {
-            user: process.env.email_sendoutAccount_user,
-            pass: process.env.email_sendoutAccount_pass
-        }
+    auth: {
+        user: process.env.email_user,
+        pass: process.env.email_pass
     }
-}
+  }
 
 /* // Using Postgres as the default, with only a Postgres DB
 , model: {

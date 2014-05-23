@@ -1,0 +1,44 @@
+<div class="profile">
+    <div class="ro whitebg">
+        <div class="ce w12">
+            <div class="br1 left">
+                <div class="userform">
+                    <form action="/settings/forgetpwd" method="post">
+                        <div class="title">
+                            <h3>密码找回</h3>
+                        </div>
+                        <% if(user.sendemailsuccess)
+                        { %>
+                        <div class="pwdsuccess">
+                            <p>已将密码发至您的注册邮箱，请及时查看。为了安全起见，请及时修改您的密码。</p>
+                        </div>
+                        <% }
+                        else
+                        {%>
+                        <div class="itemslist">
+                            <div class="item">
+                                <input name="email" type="text" placeholder="请输入注册邮箱" value="<%= user.email %>" />
+                                <% if(user.errors && user.errors.email) { %>
+                                <span class="error"><%= user.errors.email %></span>
+                                <%}%>
+                                <% if(user.notfinderror) { %>
+                                <span class="error">该邮箱未被注册过，请输入注册邮箱。</span>
+                                <%}%>
+                                <% if(user.sendemailfail) { %>
+                                <span class="error">对不起，出错了，请重试。</span>
+                                <%}%>
+                            </div>
+                            <% if(user.isadmin) { %>
+                            <input name="isadmin" type="hidden" value="1" />
+                            <%}%>
+                        </div>
+                        <div class="submit">
+                            <input class="submitBtn"  type="submit" value="找回密码" />
+                        </div>
+                      <% } %>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

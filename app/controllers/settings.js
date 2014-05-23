@@ -6,6 +6,7 @@ var Settings = function () {
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
 
+    this.before(geddy.viewHelpers.requireAuth(null), { only: ['forgetpwd', 'forgetpwd_post'] });
     this.before(geddy.viewHelpers.requireAuth(geddy.model.User.userrole.user), { only: ['profile', 'profile_pwd', 'profile_info'] });
 
     this.profile = function (req, resp, params) {
@@ -152,6 +153,60 @@ var Settings = function () {
                 }
             }
         });
+    };
+
+    this.forgetpwd = function (req, resp, params) {
+        var self = this;
+        params.isadmin = params.isadmin == "1";
+        self.respond({user: params}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+    };
+
+    this.forgetpwd_post = function (req, resp, params) {
+        var self = this;
+        var user = geddy.model.User.create({email : params.email});
+        user.isadmin = params.isadmin == "1";
+        user.isValid();
+
+        if(user.errors && user.errors.email)
+        {
+            self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+        }
+        else
+        {
+            var model = user.isadmin ? geddy.model.Admin : geddy.model.User;
+            model.first({email: user.email}, function(err, curruser) {
+                if (err) {
+                    throw err;
+                }
+                if (!curruser) {
+                    user.notfinderror = true;
+                    self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                }
+                else {
+
+                    //send email out
+                    var emailopt = {
+                            url : geddy.viewHelpers.urlFor({host: geddy.config.hostname, port: geddy.config.port, controller:'Emails', action: 'pwdemail'}),
+                            method : 'POST',
+                            data: { nickname: curruser.nickname, username: curruser.username, password: curruser.password},
+                            to : curruser.nickname + "<" + curruser.email + ">",
+                            subject: "[MySite] 密码找回 ✔"
+                    };
+
+                    geddy.viewHelpers.sendEmail(emailopt, function(){
+                        user.sendemailsuccess = true;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                    },
+                    function(){
+                        user.sendemailfail = true;
+                        self.respond({user: user}, {format: 'html', template: 'app/views/settings/forgetpwd'});
+                    });
+
+                }
+            });
+        }
+
+
     };
 };
 

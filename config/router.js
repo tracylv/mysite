@@ -48,6 +48,10 @@ router.get('/settings/profile_pwd(.:format)').to('Settings.profile');
 router.get('/settings/profile_info(.:format)').to('Settings.profile');
 router.post('/settings/profile_pwd(.:format)').to('Settings.profile_pwd');
 router.post('/settings/profile_info(.:format)').to('Settings.profile_info');
+router.get('/settings/forgetpwd(.:format)').to('Settings.forgetpwd');
+router.post('/settings/forgetpwd(.:format)').to('Settings.forgetpwd_post');
+
+router.post('/emails/pwdemail(.:format)').to('Emails.pwdemail');
 
 router.get('/lives/index(.:format)').to('Lives.index');
 

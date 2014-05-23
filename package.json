@@ -5,7 +5,7 @@
   "author": "Tracy Lv",
   "repository": {
       "type": "git",
-      "url": "null currently"
+      "url": "https://github.com/tracylv/MySite"
   },
   "dependencies": {
       "geddy": "^0.12.9",
