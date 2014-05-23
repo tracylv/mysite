@@ -1,13 +1,51 @@
-<html>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
+    <title>[MySite]密码找回</title>
+
+    <style type="text/css">
+        body {font-size: 14px; line-height: 20px; background-color: #ffffff;-webkit-font-smoothing: antialiased;font-family: 'Microsoft Yahei','微软雅黑',Arial,'宋体';}
+        body table, body th, body td{font-size: 14px; line-height: 20px; border-collapse: collapse; font-family: 'Microsoft Yahei','微软雅黑',Arial,'宋体';}
+    </style>
 </head>
-<body>
-<div>
-    Hi <%= user.nickname %>
-</div>
-<div>here is your username and password</div>
-<div>username: <%= user.username %></div>
-<div>passowrd: <%= user.password %></div>
+<body style="font-family: 'Microsoft Yahei','微软雅黑',Arial,'宋体';">
+
+<table border="0" cellpadding="0" cellspacing="0" align="left" style="font-family: 'Microsoft Yahei','微软雅黑',Arial,'宋体';">
+    <tr>
+        <td>Hi <%= user.nickname %>，</td>
+    </tr>
+    <tr>
+        <td height="30">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>请牢记您的账号和密码，为了您的账号安全，请及时修改您的密码，以免造成不必要的损失！</td>
+    </tr>
+    <tr>
+        <td height="15">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>
+            <table border="0" cellpadding="0" cellspacing="0" align="left" style="font-family: 'Microsoft Yahei','微软雅黑',Arial,'宋体'; width:auto; display: inline;background-color: #ff1493;">
+                <tr style="display: inline">
+                    <td style="padding:5px 10px; width: 60px;color: #ffffff;">用户名:</td>
+                    <td style="padding:5px 20px; width: auto;color: #ffffff;"><%= user.username %></td>
+                </tr>
+                <tr style="display: inline">
+                    <td style="padding:5px 10px; width: 60px;color: #ffffff;">密码:</td>
+                    <td style="padding:5px 20px; width: auto;color: #ffffff;"><%= user.password %></td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td height="40">&nbsp;</td>
+    </tr>
+    <tr>
+        <td>Thanks, <br/>The MySite Team</td>
+    </tr>
+</table>
+
 </body>
 </html>
