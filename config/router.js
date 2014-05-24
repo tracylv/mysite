@@ -19,7 +19,7 @@
 
 var router = new geddy.RegExpRouter();
 
-router.get('/').to('Main.index');
+router.get('/').to('Lives.index');
 
 router.get('/users/login(.:format)').to('Users.login');
 router.get('/users/logout(.:format)').to('Users.logout');
