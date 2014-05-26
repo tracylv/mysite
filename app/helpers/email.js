@@ -6,6 +6,7 @@ var sendEmail = function (emailopt, success, fail) {
 //    example emailopt:
 //    {
 //        url : "absolute url",
+//        headers: {'Content-Type': 'application/x-www-form-urlencoded'},  // if it is a post request.
 //        method : 'GET',
 //        data: data to send on Post method
 //        to : "example.163.com",
@@ -14,7 +15,7 @@ var sendEmail = function (emailopt, success, fail) {
 //    success: it's a success callback function
 //    fail: it's a fail callback function
 
-    geddy.request({url: emailopt.url, headers: { data : geddy.uri.paramify(emailopt.data)}, method: emailopt.method ? emailopt.method : 'GET'}, function (err, htmldata) {
+    geddy.request({url: emailopt.url, data : geddy.uri.paramify(emailopt.data), headers: emailopt.headers ? emailopt.headers : {}, method: emailopt.method ? emailopt.method : 'GET'}, function (err, htmldata) {
         if (err) {
             fail();
         }

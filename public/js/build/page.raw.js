@@ -1,4 +1,4 @@
-/*! MySite 2014-05-25 */
+/*! MySite 2014-05-26 */
 // common.js
 /* common.js */
 var common="";

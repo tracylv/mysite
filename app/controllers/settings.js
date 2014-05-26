@@ -187,6 +187,7 @@ var Settings = function () {
                     //send email out
                     var emailopt = {
                             url : geddy.viewHelpers.urlFor({host: geddy.config.hostname, port: geddy.config.port, controller:'Emails', action: 'pwdemail'}),
+                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},
                             method : 'POST',
                             data: { nickname: curruser.nickname, username: curruser.username, password: curruser.password},
                             to : curruser.nickname + "<" + curruser.email + ">",
