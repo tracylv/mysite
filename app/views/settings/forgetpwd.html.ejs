@@ -5,7 +5,13 @@
                 <div class="userform">
                     <form action="/settings/forgetpwd" method="post">
                         <div class="title">
+                            <% if(user.isadmin) { %>
+                            <h3>管理员密码找回</h3>
+                            <% }
+                            else
+                            { %>
                             <h3>密码找回</h3>
+                            <% } %>
                         </div>
                         <% if(user.sendemailsuccess)
                         { %>

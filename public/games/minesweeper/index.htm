@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mine Sweeper</title>
+    <link rel="stylesheet" type="text/css" href="./minesweeper.css" />
+    <script type="text/javascript" src="jquery-1.4.2.min.js" ></script>
+    <script type="text/javascript" src="minesweeper.js" ></script>
+    <script type="text/javascript">
+      document.oncontextmenu=function(e){return false;} 
+    </script>
+  </head>
+<body>
+  <div class="container" autofocus>
+    <div class="head">
+       <span class="mine">&nbsp;</span>
+       <span class="time">&nbsp;</span>
+    </div>
+    <div style="position:relative;">
+    <canvas id="canvas" class="canvas" width="400" height="400" name="canvas" ></canvas>
+    </div>
+    <div class="foot">
+       <select class="level" >
+         <option value="0" selected>Easy</option>
+         <option value="1">Normal</option>
+         <option value="2">Difficult</option>
+       </select>
+       <input class="startbtn" type="button" value="Start" onclick="$.init()" />
+       <input class="resetbtn" type="button" value="Reset" onclick="window.location = window.location.href" />
+    </div>
+  </div>
+</body>
+</html>

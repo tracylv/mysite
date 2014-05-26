@@ -5,12 +5,7 @@ var Emails = function () {
     //get password email controller
     this.pwdemail = function (req, resp, params) {
         var self = this;
-        var user = {};
-        if(req.headers.data)
-        {
-            user = geddy.uri.objectify(req.headers.data);
-        }
-        self.respond({user: user}, {layout: false});
+        self.respond({user: params}, {layout: false});
     };
 };
 
