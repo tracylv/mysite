@@ -58,6 +58,13 @@
 
                            var x = event.layerX;
                            var y = event.layerY;
+
+                           if(navigator.userAgent.indexOf("MSIE") > 0)
+                           {
+                               x = event.offsetX;
+                               y = event.offsetY;
+                           }
+
                            x =  parseInt((x >= 1? x-1: x)/itemWidth) * itemWidth;
                            y =  parseInt((y >= 1? y-1: y)/itemWidth) * itemWidth;                       
 
