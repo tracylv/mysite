@@ -16,8 +16,8 @@ var requireAuth = function (authType) {
     var userrole = self.session.get("userrole");
 
     // cookies
-    var cuserid = self.cookies.get("userid", {domain : geddy.config.hostname});
-    var cusertype = self.cookies.get("usertype", {domain : geddy.config.hostname});
+    var cuserid = self.cookies.get("userid");
+    var cusertype = self.cookies.get("usertype");
 
 
     // if don't have some session or session lost
