@@ -1,6 +1,6 @@
 var Lives = function () {
 
-    geddy.viewHelpers.page_info.page_title = "我的网站 - 生活";
+    geddy.viewHelpers.page_info.page_title = "我的网站 - 广场";
     geddy.viewHelpers.menu_data.active_tab = "life";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
