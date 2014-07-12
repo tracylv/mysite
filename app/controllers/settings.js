@@ -1,7 +1,7 @@
 
 var Settings = function () {
 
-    geddy.viewHelpers.page_info.page_title = "我的网站 - 个人信息";
+    geddy.viewHelpers.page_info.page_title = "TracyLv - 个人信息";
     geddy.viewHelpers.menu_data.active_tab = "admin";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];

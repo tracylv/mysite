@@ -1,4 +1,4 @@
-/*! MySite 2014-06-19 */
+/*! MySite 2014-07-12 */
 /* common.js */
 
 if (typeof String.prototype.trim !== 'function') {
