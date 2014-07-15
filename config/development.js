@@ -43,7 +43,7 @@ var config = {
     defaultAdapter: 'filesystem'
   }
 , sessions: {
-    store: 'cookie'
+    store: 'memory'
     , key: 'sid'
     , expiry: 14 * 24 * 60 * 60
   }
