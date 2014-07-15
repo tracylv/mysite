@@ -1,6 +1,6 @@
 var Admins = function () {
 
-    geddy.viewHelpers.page_info.page_title = "我的网站 - 管理员";
+    geddy.viewHelpers.page_info.page_title = "TracyLv - 管理员";
     geddy.viewHelpers.menu_data.active_tab = "admin";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];

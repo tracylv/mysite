@@ -1,6 +1,6 @@
 var Basketballs = function () {
 
-    geddy.viewHelpers.page_info.page_title = "我的网站 - NBA";
+    geddy.viewHelpers.page_info.page_title = "TracyLv - NBA";
     geddy.viewHelpers.menu_data.active_tab = "basketball";
 
     this.respondsWith = ['html', 'json', 'xml', 'js', 'txt'];
