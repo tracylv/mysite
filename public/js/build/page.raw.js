@@ -98,7 +98,7 @@ $(function () {
     $("input[type='text'], input[type='password']").hintText();
 
     // audio player
-    new jPlayerPlaylist({
+    var myPlaylist = new jPlayerPlaylist({
         jPlayer: "#jquery_jplayer_1",
         cssSelectorAncestor: "#jp_container_1"
     }, [
@@ -107,6 +107,18 @@ $(function () {
             free:true,
             mp3:"/media/audio/troubleisafriend.mp3",
             oga:"/media/audio/troubleisafriend.ogg"
+        },
+        {
+            title:"The Show",
+            free:true,
+            mp3:"/media/audio/TheShow.mp3",
+            oga:"/media/audio/TheShow.ogg"
+        },
+        {
+            title:"The Sound of Silence",
+            free:true,
+            mp3:"/media/audio/TheSoundofSilence.mp3",
+            oga:"/media/audio/TheSoundofSilence.ogg"
         },
         {
             title:"Everything At Once",
@@ -128,8 +140,9 @@ $(function () {
         }
     ], {
         playlistOptions: {
-            autoPlay: true
-        },
+            autoPlay: true,
+            shuffleTime: "fast"
+       },
         swfPath: "/plugins/jplayer",
         supplied: "mp3, oga",
         wmode: "window",
@@ -137,7 +150,6 @@ $(function () {
         keyEnabled: true,
         loop: true
     });
-
-
+    myPlaylist.shuffle(true);
 
 });
