@@ -59,4 +59,11 @@ $(function () {
     });
     myPlaylist.shuffle(true);
 
+    //slideshow
+    $('.bxslider').bxSlider({
+        auto: true,
+        slideWidth: 700,
+        autoControls: true
+    });
+
 });
