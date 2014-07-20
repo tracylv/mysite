@@ -1,4 +1,4 @@
-/*! MySite 2014-07-19 */
+/*! MySite 2014-07-20 */
 /* common.js */
 
 if (typeof String.prototype.trim !== 'function') {
@@ -151,5 +151,12 @@ $(function () {
         loop: true
     });
     myPlaylist.shuffle(true);
+
+    //slideshow
+    $('.bxslider').bxSlider({
+        auto: true,
+        slideWidth: 700,
+        autoControls: true
+    });
 
 });
