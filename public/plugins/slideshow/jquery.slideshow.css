@@ -22,3 +22,35 @@
 {
     display: none;
 }
+
+.slideshow .prev
+{
+    position: absolute;
+    top: 162px;
+    left: 0;
+    width: 30px;
+    height: 77px;
+    background: url("../../plugins/slideshow/slideshowsprite.png") no-repeat scroll 0 -254px transparent;
+    z-index: 50;
+}
+
+.slideshow .prev:hover
+{
+    background: url("../../plugins/slideshow/slideshowsprite.png") no-repeat scroll 0 0 transparent;
+}
+
+.slideshow .next
+{
+    position: absolute;
+    top: 162px;
+    width: 30px;
+    height: 77px;
+    right: 0;
+    background: url("../../plugins/slideshow/slideshowsprite.png") no-repeat scroll 0 -381px transparent;
+    z-index: 50;
+}
+
+.slideshow .next:hover
+{
+    background: url("../../plugins/slideshow/slideshowsprite.png") no-repeat scroll 0 -127px transparent;
+}
