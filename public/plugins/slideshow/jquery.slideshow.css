@@ -1,0 +1,24 @@
+.slideshow
+{
+    position: relative;
+    overflow: hidden;
+}
+
+.slideshow ul,
+.slideshow ul li
+{
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    float: left;
+}
+
+.slideshow ul li img
+{
+    float: left;
+}
+
+.slideshow .itemlist
+{
+    display: none;
+}
