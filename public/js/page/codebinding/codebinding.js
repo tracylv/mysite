@@ -14,43 +14,37 @@ $(function () {
     }, [
         {
             title:"Trouble Is A Friend",
-            free:true,
             mp3:"/media/audio/troubleisafriend.mp3",
             oga:"/media/audio/troubleisafriend.ogg"
         },
         {
             title:"The Show",
-            free:true,
             mp3:"/media/audio/TheShow.mp3",
             oga:"/media/audio/TheShow.ogg"
         },
         {
             title:"The Sound of Silence",
-            free:true,
             mp3:"/media/audio/TheSoundofSilence.mp3",
             oga:"/media/audio/TheSoundofSilence.ogg"
         },
         {
             title:"Everything At Once",
-            free:true,
             mp3:"/media/audio/EverythingAtOnce.mp3",
             oga:"/media/audio/EverythingAtOnce.ogg"
         },
         {
             title:"洛丽塔",
-            free:true,
             mp3:"/media/audio/luolita.mp3",
             oga:"/media/audio/luolita.ogg"
         },
         {
             title:"皇后大道东",
-            free:true,
             mp3:"/media/audio/huanghoudadaodong.mp3",
             oga:"/media/audio/huanghoudadaodong.ogg"
         }
     ], {
         playlistOptions: {
-            autoPlay: true,
+            autoPlay: false,
             shuffleTime: "fast"
        },
         swfPath: "/plugins/jplayer",
