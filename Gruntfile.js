@@ -12,7 +12,7 @@ module.exports = function(grunt) {
             },
             js: {
                 // the files to concatenate
-                src: ['public/js/page/*.js', 'public/js/page/codebinding/codebinding.js'],
+                src: ['public/js/page/*.js', 'public/plugins/slideshow/jquery.slideshow.js', 'public/js/page/codebinding/codebinding.js'],
                 // the location of the resulting JS file
                 dest: 'public/js/build/page.raw.js'
             },
@@ -27,7 +27,8 @@ module.exports = function(grunt) {
                       'public/css/main/users.less',
                       'public/css/main/win8.less',
                       'public/css/main/lives.less',
-                      'public/css/main/games.less'],
+                      'public/css/main/games.less',
+                      'public/plugins/slideshow/jquery.slideshow.css'],
                 // the location of the resulting JS file
                 dest: 'public/css/build/page.raw.less'
             },
