@@ -4,6 +4,9 @@ $(function () {
     //hintText
     $("input[type='text'], input[type='password']").hintText();
 
+    //slideshow
+    $('.slideshow').slideshow();
+
     // audio player
     var myPlaylist = new jPlayerPlaylist({
         jPlayer: "#jquery_jplayer_1",
@@ -58,12 +61,5 @@ $(function () {
         loop: true
     });
     myPlaylist.shuffle(true);
-
-    //slideshow
-    $('.bxslider').bxSlider({
-        auto: true,
-        slideWidth: 700,
-        autoControls: true
-    });
 
 });
