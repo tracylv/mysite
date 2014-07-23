@@ -26,7 +26,7 @@
 .slideshow .prev
 {
     position: absolute;
-    top: 162px;
+    top: 215px;
     left: 0;
     width: 30px;
     height: 77px;
@@ -42,7 +42,7 @@
 .slideshow .next
 {
     position: absolute;
-    top: 162px;
+    top: 215px;
     width: 30px;
     height: 77px;
     right: 0;
