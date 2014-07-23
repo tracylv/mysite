@@ -1,4 +1,4 @@
-/*! MySite 2014-07-22 */
+/*! MySite 2014-07-23 */
 /* common.js */
 
 if (typeof String.prototype.trim !== 'function') {
@@ -115,36 +115,54 @@ var header='h';
 
             var slidewidth = $slideitem.width();
             var $list = $(".itemlist li", $con);
-            var slidenum = $list.length;
+            var slidenum = $list.length + 1;
             var timeoutid = null;
+            var $slideitemcopy;
+            var currentindex = settings.loop === true ? 1 : 0;
+            var lock = false;
 
             $con.width(slidewidth).height($slideitem.height());
-            $slide.width(slidewidth).height($slideitem.height());
-            $slide.css({"position":"absolute", "top":"0", "left":"0"});
+            for(var i = 0; i < $list.length; i++)
+            {
+                $slideitemcopy = $slideitem.clone();
+                $slideitemcopy.find("img").attr("src",$list.eq(i).find(".img-src").attr("img-src"));
+                $slide.append($slideitemcopy);
+            }
+
+            if(settings.loop)
+            {
+                // add the last item copy before the first slide, and add the first item copy after the last slide
+                $slide.append($("li", $slide).eq(0).clone());
+                $slide.prepend($("li", $slide).eq(slidenum - 1).clone());
+                $slide.css({"margin-left": 0 - slidewidth + "px"});
+            }
+            else
+            {
+                $("a.prev", $con).hide();
+            }
+            $slide.width(slidewidth * $("li", $slide).length).height($slideitem.height());
 
             $("a.control", $con).click(function(e){
 
+                if(lock)
+                {
+                    return false;
+                }
+
                 var $this = $(this);
                 var dir = "next";
-                var index = $(".itemlist li.current", $con).index();
 
                 if($this.hasClass("prev"))
                 {
                     dir = "prev";
                 }
 
-                if(!settings.loop && ((index === 0 && dir =="prev") || (index == slidenum - 1 && dir =="next")))
+                if(!settings.loop && ((currentindex === 0 && dir =="prev") || (currentindex == slidenum - 1 && dir =="next")))
                 {
                     return false;
                 }
 
-                // make sure previous sliding finished
-                if($("li",$slide).length >= 2 || $("li",$slide).length === 0)
-                {
-                    return false;
-                }
-
-                rotateNext(index, dir);
+                rotateNext(dir);
                 e.preventDefault();
             });
 
@@ -172,55 +190,67 @@ var header='h';
                 }, settings.duration);
             }
 
-            function rotateNext(currentindex, direction)
+            function rotateNext(direction)
             {
 
-                var nextindex;
-                var beforecss;
-                var aftercss;
-                var $slidecopy = $slideitem.clone();
+                lock = true;
+                var $slideitems = $("li", $slide);
+
+                if(settings.loop)
+                {
+                    if(currentindex === 0)
+                    {
+                        $slide.css({"margin-left": 0 - slidewidth * ($slideitems.length - 2) + "px"});
+                        currentindex = $slideitems.length - 2;
+                    }
+
+                    if(currentindex == $slideitems.length - 1)
+                    {
+                        $slide.css({"margin-left": 0 - slidewidth + "px"});
+                        currentindex = 1;
+                    }
+                }
 
                 if(direction == "prev")
                 {
-                    nextindex = (currentindex - 1 + slidenum)%slidenum;
-                    beforecss = {"left": 0 - slidewidth + "px"};
-                    aftercss  = {"left":"0"};
-                }
+                    $slide.animate({"margin-left" : "+=" + slidewidth + "px" }, 'slow', function(){
+                        currentindex = (currentindex - 1 + $slideitems.length) % $slideitems.length;
 
-                if(direction == "next")
-                {
-                    nextindex = (currentindex + 1 + slidenum)%slidenum;
-                    beforecss = {"left":"0"};
-                    aftercss  = {"left": 0 - slidewidth + "px"};
-                }
+                        if(!settings.loop && currentindex === 0)
+                        {
+                            $("a.prev", $con).hide();
+                        }
+                        else
+                        {
+                            $("a.prev", $con).show();
+                        }
 
-                // right align
-                $slide.css(beforecss);
+                        $("a.next", $con).show();
 
-                // make container width bigger to contain two slides
-                $slide.width(slidewidth * 2);
-                $slidecopy.find("img").attr("src",$list.eq(nextindex).find(".img-src").attr("img-src"));
-
-                if(direction == "prev")
-                {
-                    $slide.prepend($slidecopy);
-                    $slide.animate(aftercss, 'slow', function(){
-                        $slide.find("li:last").remove();
-                        $slide.width(slidewidth).css({"left": 0});
+                        lock = false;
                     });
                 }
 
                 if(direction == "next")
                 {
-                    $slide.append($slidecopy);
-                    $slide.animate(aftercss, 'slow', function(){
-                        $slide.find("li:first").remove();
-                        $slide.width(slidewidth).css({"left": 0});
+
+                    $slide.animate({"margin-left" : "-=" + slidewidth + "px" }, 'slow', function(){
+                        currentindex = (currentindex + 1 + $slideitems.length) % $slideitems.length;
+
+                        if(!settings.loop && currentindex == $slideitems.length - 1)
+                        {
+                            $("a.next", $con).hide();
+                        }
+                        else
+                        {
+                            $("a.next", $con).show();
+                        }
+
+                        $("a.prev", $con).show();
+
+                        lock = false;
                     });
                 }
-
-                $list.eq(currentindex).removeClass("current");
-                $list.eq(nextindex).addClass("current");
             }
 
 
