@@ -9,9 +9,9 @@ var page_info = {
 var menu_data = {
     active_tab : "life",
     data : [{tab: "life", text: "首页", link: "/lives/index"},
-            {tab: "game", text: "休闲游戏", link: "/games/index"},
+            {tab: "game", text: "扫雷", link: "/games/index"},
             {tab: "basketball", text: "NBA", link: "/basketballs/index"},
-            {tab: "win8", text: "WIN8 游戏", link: "/win8/index"},
+            {tab: "win8", text: "WIN8 APP", link: "/win8/index"},
             {tab: "advice", text: "意见与建议", link: "/advices/index"},
             {tab: "admin", text: "管理员入口", link: "/admins/category"}]
 };
